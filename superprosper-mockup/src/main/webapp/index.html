@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Super Prosper</title>
+	<link type="text/css" rel="stylesheet" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+	<script type="text/javascript" src="js/bootstrap-tabs.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			// Tabs
+			$('.detailPartLinks').tabs();
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="userPanel">
+			<h1>Martine BELLE-MAMAN - 24 janvier 2012</h1>
+		</div>
+
+		<div class="listPanel">
+			<form id="listFilters">
+				<label for="filtreNonProspectes">
+						<input id="filtreNonProspectes" type="checkbox" checked="checked" />
+						Non prospectés
+					</label>
+				<input type="text" value="Recherche" />
+			</form>
+			<table id="listTable">
+				<thead>
+					<tr>
+						<th>Numéro</th>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Téléphone</th>
+						<th>Région</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>123</td>
+						<td>Dupont</td>
+						<td>Jean</td>
+						<td>0549123456</td>
+						<td>Sud-Ouest</td>
+					</tr>
+					<tr>
+						<td>124</td>
+						<td>Rolland</td>
+						<td>Anatole</td>
+						<td>0678912344</td>
+						<td>Sud-Est</td>
+					</tr>
+					<tr>
+						<td>234</td>
+						<td>Lopez</td>
+						<td>Karl</td>
+						<td>02345678</td>
+						<td>Nord-Ouest</td>
+					</tr>
+					<tr>
+						<td>245</td>
+						<td>Dupuis</td>
+						<td>Sébastien</td>
+						<td>0556345678</td>
+						<td>Sud-Ouest</td>
+					</tr>
+					<tr>
+						<td>345</td>
+						<td>Lemoine</td>
+						<td>Norbert</td>
+						<td>0634237865</td>
+						<td>Sud-Ouest</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="detailPanel">
+			<ul class="detailPartLinks">
+				<li><a href="#detailPart1">Description</a></li>
+				<li><a href="#detailPart2">Contrats</a></li>
+				<li><a href="#detailPart3">Prospections</a></li>
+			</ul>
+			<div id="detailPart1">
+				<ul>
+					<li>Nom : Rolland</li>
+					<li>Prénom : Anatole</li>
+					<li>Age : 57 ans</li>
+					<li>Status : </li>
+					<li>Enfants : </li>
+				</ul>
+				<ul>
+					<li> Date de naissance : </li>
+					<li> Lieu de naissance </li>
+					<li> Adresse :  </li>
+					<li> Ville : </li>
+					<li> Téléphone : </li>
+				</ul>
+				<div style="clear: both;">&nbsp;</div>
+			</div>
+			<div id="detailPart2">
+				<table id="contratsTable" class="display">
+					<thead>
+						<tr>
+							<th>Numéro</th>
+							<th>Produit</th>
+							<th>Date de signature</th>
+							<th>Date d'effet</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>001</td>
+							<td>Dupont</td>
+							<td>01/01/2010</td>
+							<td>05/01/2010</td>
+						</tr>
+						<tr>
+							<td>002</td>
+							<td>Rolland</td>
+							<td>20/05/2010</td>
+							<td>05/06/2010</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="detailPart3">
+				<ul>
+					<li>Le 01/01/10 par Jean Marc BEAU PAPA</li>
+					<li>Le 05/06/10 par Martine BELLE MAMAN</li>
+				</ul>
+			</div>
+			<form class="detailCommands">
+				<input type="submit" value="Nouvelle prospection" class="btn primary" />
+			</form>
+		</div>
+	</div>		
+</body>
+</html>

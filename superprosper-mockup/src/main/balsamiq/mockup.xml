@@ -1,0 +1,99 @@
+<mockup version="1.0" skin="sketch" measuredW="753" measuredH="646" mockupW="686" mockupH="634">
+  <controls>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="67" y="12" w="686" h="634" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Super%20Prosper%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::TabBar" x="90" y="377" w="641" h="204" measuredW="317" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Description%2CContrats%2C%20Prospections</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::DataGrid" x="90" y="173" w="641" h="175" measuredW="378" measuredH="175" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <selectedIndex>1</selectedIndex>
+        <text>Num%E9ro%20%5E%2CNom%2C%20Pr%E9nom%2C%20T%E9l%E9phone%2C%20R%E9gion%0A123%2CDupont%2CJean%2C0549123456%2CSud-Ouest%0A124%2CRolland%2CAnatole%2C0678912344%2CSud-Est%0A234%2CLopez%2CKarl%2C0234567658%2CNord-Ouest%0A245%2CDupuis%2CS%E9bastien%2C0556345678%2CSud-Ouest%0A345%2CLemoine%2CNorbert%2C0634237865%2CSud-Ouest%0A%7B10R%2C%2030L%2C%2030L%2C%2010R%2C%2020L%7D</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::ButtonBar" x="504" y="348" w="-1" h="-1" measuredW="227" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>-1</selectedIndex>
+        <text>Prem%2CPrev%2CSuiv%2CDern</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::CheckBox" x="115" y="147" w="-1" h="-1" measuredW="117" measuredH="22" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Non%20prospect%E9s</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="589" y="581" w="-1" h="-1" measuredW="142" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nouvelle%20prospection</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::SearchBox" x="539" y="144" w="192" h="-1" measuredW="85" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>recherche</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Label" x="128" y="435" w="-1" h="-1" measuredW="83" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nom%20%3A%20Rolland</text>
+      </controlProperties>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Label" x="128" y="456" w="-1" h="-1" measuredW="104" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pr%E9nom%20%3A%20Anatole</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Label" x="128" y="477" w="-1" h="-1" measuredW="79" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Age%20%3A%2057%20ans</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Label" x="417" y="434" w="-1" h="-1" measuredW="209" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Date%20de%20naissance%20%3A%2012%20janvier%201955</text>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="417" y="455" w="-1" h="-1" measuredW="189" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Lieu%20de%20naissance%20%3A%20Ch%E2tellerault</text>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Label" x="128" y="498" w="-1" h="-1" measuredW="77" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Statut%20%3A%20veuf</text>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Label" x="128" y="519" w="-1" h="-1" measuredW="68" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enfants%20%3A%205</text>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::Label" x="417" y="476" w="-1" h="-1" measuredW="155" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Adresse%20%3A%2023%20rue%20du%20Tilleul</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Label" x="417" y="497" w="-1" h="-1" measuredW="133" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ville%20%3A%20Marseille%2C%2013000</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Label" x="417" y="518" w="-1" h="-1" measuredW="173" measuredH="21" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>T%E9l%E9phone%20%3A%2006%2078%2091%2023%2044</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Label" x="115" y="111" w="-1" h="-1" measuredW="241" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Martine%20BELLE%20MAMAN%20-%2024janvier%202012</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
