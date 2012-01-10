@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence">
+
+	<persistence-unit name="superprosper-persistence"
+		transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+<!-- 		<class>com.serli.sample.superprosper.domain.Agent</class> -->
+
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+			<property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:derby://localhost:1527/superprosper;user=superprosper;password=superprosper;update=true" />
+			<property name="hibernate.current_session_context_class" value="thread"></property>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"></property>
+			<property name="hibernate.show_sql" value="true"></property>
+<!--   			<property name="hibernate.hbm2ddl.auto" value="create"></property>   -->
+		</properties>
+
+	</persistence-unit>
+</persistence>
