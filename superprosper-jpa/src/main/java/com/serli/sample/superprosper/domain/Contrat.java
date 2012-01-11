@@ -3,8 +3,6 @@ package com.serli.sample.superprosper.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +24,8 @@ public class Contrat implements Serializable {
 	
 	private static final long serialVersionUID = 4924679998802311541L;
 
-	@Id
+	@MapsId
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int numero;
 	
 	@Id
@@ -33,7 +33,7 @@ public class Contrat implements Serializable {
 	String produit;
 	
 	@JoinColumn(name="CLIENT", referencedColumnName = "NUMERO", nullable = false)	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Client client;
 
 	@Temporal(TemporalType.DATE)

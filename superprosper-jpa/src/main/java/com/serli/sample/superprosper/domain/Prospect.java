@@ -3,14 +3,12 @@ package com.serli.sample.superprosper.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,11 +26,11 @@ public class Prospect implements Serializable {
 	
 	@Id
 	@JoinColumn(name="CLIENT", referencedColumnName="numero")
-	@OneToOne
+	@ManyToOne
 	private Client client;
 
 	@JoinColumn(name="AGENT", referencedColumnName = "matricule", nullable = false)	
-	@OneToOne
+	@ManyToOne
 	private Agent agent;
 
 	public Prospect(Date contact, Client client, Agent agent) {

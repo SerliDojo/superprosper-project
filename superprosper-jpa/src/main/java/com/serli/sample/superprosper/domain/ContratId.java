@@ -9,8 +9,8 @@ public class ContratId implements Serializable {
 
 	private static final long serialVersionUID = 8381794426729315394L;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int numero;
+	
 	private String produit;
 	
 	public ContratId() {};
