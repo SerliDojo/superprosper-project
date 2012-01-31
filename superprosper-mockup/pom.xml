@@ -8,7 +8,6 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.serli.dojo</groupId>
 	<artifactId>superprosper-mockup</artifactId>
 	<packaging>war</packaging>
 </project>

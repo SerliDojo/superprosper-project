@@ -8,10 +8,6 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.serli.dojo</groupId>
 	<artifactId>superprosper-db</artifactId>
 	<packaging>war</packaging>
-
-	<dependencies>
-	</dependencies>
 </project>
