@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Super Prosper</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+<style>
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">SuperProsper</a>
+				<div class="nav-collapse">
+					<!-- 					<ul class="nav"> -->
+					<!-- 						<li class="active"><a href="#">Prospection</a></li> -->
+					<!-- 						<li><a href="#about">Vente</a></li> -->
+					<!-- 						<li><a href="#contact">Aide</a></li> -->
+					<!-- 					</ul> -->
+					<p class="navbar-text pull-right">
+						24 janvier 2012 - Connecté en tant que <a href="#">Martine
+							BELLE-MAMAN</a>
+					</p>
+				</div>
+				/.nav-collapse
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="listPanel">
+			<form id="listFilters" class="form-inline">
+				<select>
+				 	<option>Tous</option>
+				 	<option>Non prospectés</option>
+				 	<option>Prospectés</option>
+				 	<option>Clients</option>
+				</select>	
+				<input class="span6" type="text" placeholder="Recherche" />
+				<button type="submit" class="btn">Rechercher</button>
+			</form>
+			<table id="listTable" class="table table-striped">
+				<thead>
+					<tr>
+						<th class="span1">Numéro</th>
+						<th class="span2">Nom</th>
+						<th class="span2">Prénom</th>
+						<th class="span2">Téléphone</th>
+						<th class="span2">Région</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>123</td>
+						<td><strong>Dupont</strong></td>
+						<td><strong>Jean</strong></td>
+						<td>0549123456</td>
+						<td>Sud-Ouest</td>
+					</tr>
+					<tr>
+						<td>124</td>
+						<td><strong>Rolland</strong></td>
+						<td><strong>Anatole</strong></td>
+						<td>0678912344</td>
+						<td>Sud-Est</td>
+					</tr>
+					<tr>
+						<td>234</td>
+						<td><strong>Lopez</strong></td>
+						<td><strong>Karl</strong></td>
+						<td>02345678</td>
+						<td>Nord-Ouest</td>
+					</tr>
+					<tr>
+						<td>245</td>
+						<td><strong>Dupuis</strong></td>
+						<td><strong>Sébastien</strong></td>
+						<td>0556345678</td>
+						<td>Sud-Ouest</td>
+					</tr>
+					<tr>
+						<td>345</td>
+						<td><strong>Lemoine</strong></td>
+						<td><strong>Norbert</strong></td>
+						<td>0634237865</td>
+						<td>Sud-Ouest</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="pagination pagination-right">
+				<ul>
+					<li><a href="#">&lt;&lt;</a></li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">&gt;&gt;</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="detailPanel">
+			<div id="detailTitle" class="page-header">
+				<h1>
+					Anatole ROLLAND
+					<button class="btn btn-primary btn-mini" type="submit">Modification</button>
+					<button class="btn btn-primary btn-mini" type="submit">Nouveau contrat</button>
+					<button class="btn btn-primary btn-mini" type="submit">Nouvelle prospection</button>
+				</h1>
+			</div>
+			<div id="detailTabs" class="row">
+				<div id="detailPart1" class="span4">
+					<h3>Description</h3>
+					<table id="contratsTable" class="table table-striped">
+						<tbody>
+							<tr>
+								<td>Age</td>
+								<td>57 ans</td>
+							</tr>
+							<tr>
+								<td>Adresse</td>
+								<td>
+									41 Rue des Caillottes<br/>
+									36500 Vendœuvres
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="detailPart2" class="span4">
+					<h3>Contrats</h3>
+					<table id="contratsTable" class="table table-striped">
+						<thead>
+							<tr>
+								<th class="span2">Numéro</th>
+								<th class="span6">Produit</th>
+								<th class="span2">Signature</th>
+								<th class="span2">Effet</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>001</td>
+								<td>Assurance</td>
+								<td>01/01/2010</td>
+								<td>05/01/2010</td>
+							</tr>
+							<tr>
+								<td>002</td>
+								<td>Location</td>
+								<td>20/05/2010</td>
+								<td>05/06/2010</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="detailPart3" class="span4">
+					<h3>Prospections</h3>
+					<table id="prospectionssTable" class="table table-striped">
+						<thead>
+							<tr>
+								<th class="span4">Date</th>
+								<th class="span8">Gestionnaire</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>01/01/2010</td>
+								<td>Jean Marc BEAU PAPA</td>
+							</tr>
+							<tr>
+								<td>05/06/2010</td>
+								<td>Martine BELLE MAMAN</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

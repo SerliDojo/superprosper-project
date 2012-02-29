@@ -1,142 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Super Prosper</title>
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-	<link type="text/css" rel="stylesheet" href="css/base.css" />
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap-tabs.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Super Prosper</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+<style>
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="userPanel">
-			<h1>Martine BELLE-MAMAN - 24 janvier 2012</h1>
-		</div>
-
-		<div class="listPanel">
-			<form id="listFilters">
-				<label for="filtreNonProspectes">
-						<input id="filtreNonProspectes" type="checkbox" checked="checked" />
-						Non prospectés
-					</label>
-				<input type="text" value="Recherche" />
-			</form>
-			<table id="listTable" class="zebra-striped">
-				<thead>
-					<tr>
-						<th>Numéro</th>
-						<th>Nom</th>
-						<th>Prénom</th>
-						<th>Téléphone</th>
-						<th>Région</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>123</td>
-						<td>Dupont</td>
-						<td>Jean</td>
-						<td>0549123456</td>
-						<td>Sud-Ouest</td>
-					</tr>
-					<tr>
-						<td>124</td>
-						<td>Rolland</td>
-						<td>Anatole</td>
-						<td>0678912344</td>
-						<td>Sud-Est</td>
-					</tr>
-					<tr>
-						<td>234</td>
-						<td>Lopez</td>
-						<td>Karl</td>
-						<td>02345678</td>
-						<td>Nord-Ouest</td>
-					</tr>
-					<tr>
-						<td>245</td>
-						<td>Dupuis</td>
-						<td>Sébastien</td>
-						<td>0556345678</td>
-						<td>Sud-Ouest</td>
-					</tr>
-					<tr>
-						<td>345</td>
-						<td>Lemoine</td>
-						<td>Norbert</td>
-						<td>0634237865</td>
-						<td>Sud-Ouest</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="detailPanel">
-			<form class="detailCommands">
-				<input type="submit" value="Nouvelle prospection" class="btn" />
-			</form>
-			<ul class="tabs" data-tabs="">
-				<li class="active"><a href="#detailPart1">Description</a></li>
-				<li><a href="#detailPart2">Contrats</a></li>
-				<li><a href="#detailPart3">Prospections</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="detailPart1" class="active row">
-					<div class="span8">
-						<ul>
-							<li>Nom : Rolland</li>
-							<li>Prénom : Anatole</li>
-							<li>Age : 57 ans</li>
-							<li>Status : </li>
-							<li>Enfants : </li>
-						</ul>
-					</div>
-					<div class="span8">
-						<ul>
-							<li> Date de naissance : </li>
-							<li> Lieu de naissance </li>
-							<li> Adresse :  </li>
-							<li> Ville : </li>
-							<li> Téléphone : </li>
-						</ul>
-					</div>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#"><img src="images/logoBleu.png" /></a>
+				<div class="nav-collapse">
+					<!-- 					<ul class="nav"> -->
+					<!-- 						<li class="active"><a href="#">Prospection</a></li> -->
+					<!-- 						<li><a href="#about">Vente</a></li> -->
+					<!-- 						<li><a href="#contact">Aide</a></li> -->
+					<!-- 					</ul> -->
+					<p class="navbar-text pull-right">
+						24 janvier 2012 - Connecté en tant que <a href="#">Martine
+							BELLE-MAMAN</a>
+					</p>
 				</div>
-				<div id="detailPart2">
-					<table id="contratsTable" class="display">
-						<thead>
-							<tr>
-								<th>Numéro</th>
-								<th>Produit</th>
-								<th>Date de signature</th>
-								<th>Date d'effet</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>001</td>
-								<td>Dupont</td>
-								<td>01/01/2010</td>
-								<td>05/01/2010</td>
-							</tr>
-							<tr>
-								<td>002</td>
-								<td>Rolland</td>
-								<td>20/05/2010</td>
-								<td>05/06/2010</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="detailPart3">
-					<ul>
-						<li>Le 01/01/10 par Jean Marc BEAU PAPA</li>
-						<li>Le 05/06/10 par Martine BELLE MAMAN</li>
-					</ul>
-				</div>
+				/.nav-collapse
 			</div>
 		</div>
-	</div>		
+	</div>
+
+	<div class="container" style="text-align: center">
+		<div class="hero-unit">
+			<img src="images/logoBigBleu.png" />
+		</div>
+		<form id="listFilters" class="form-inline" action="search.html">
+			<select>
+			 	<option>Tous</option>
+			 	<option>Non prospectés</option>
+			 	<option>Prospectés</option>
+			 	<option>Clients</option>
+			</select>	
+			<input class="span6" type="text" placeholder="Recherche" />
+			<button type="submit" class="btn">Rechercher</button>
+		</form>
+	</div>
 </body>
 </html>
