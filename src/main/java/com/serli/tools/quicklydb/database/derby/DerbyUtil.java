@@ -13,6 +13,7 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import org.apache.derby.drda.NetworkServerControl;
 import org.apache.derby.tools.ij;
@@ -34,7 +35,7 @@ import org.apache.derby.tools.ij;
  * </div>
  * 
  * @author Pascal MERON
- * @version 1.0
+ * @version 1.1
  */
 public class DerbyUtil {
 
@@ -43,6 +44,7 @@ public class DerbyUtil {
 	}
 
 	protected Connection connSql = null;
+	protected StringBuilder strConn = null;
 	protected NetworkServerControl serverControl = null;
 
 	/**
@@ -95,30 +97,30 @@ public class DerbyUtil {
 	    	
 	    // Connexion cliente sur la base de donn�es derbyDB
 		Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-		StringBuilder sb = new StringBuilder("jdbc:derby://");
-		sb.append(host);
-		sb.append(":");
-		sb.append(port);
-		sb.append("/");
-		sb.append(dbName);
+		strConn = new StringBuilder("jdbc:derby://");
+		strConn.append(host);
+		strConn.append(":");
+		strConn.append(port);
+		strConn.append("/");
+		strConn.append(dbName);
 		if (create == true) 
-			sb.append(";create=true");
-		connSql = DriverManager.getConnection(sb.toString());
+			strConn.append(";create=true");
+		connSql = DriverManager.getConnection(strConn.toString());
 	}
 
 	private void createEmbedded(String dbName, Embedded typeEmbedded,
 			boolean create) throws Exception {
 		// D�marrage de la base de donn�es Derby embarqu�e
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-		StringBuilder sb = new StringBuilder("jdbc:derby:");
+		strConn = new StringBuilder("jdbc:derby:");
 		if (typeEmbedded == Embedded.MEMORY) {
-			sb.append("memory:");
+			strConn.append("memory:");
 		}
-		sb.append(dbName);
+		strConn.append(dbName);
 		if (create == true)
-			sb.append(";create=true");
+			strConn.append(";create=true");
 		// Connexion sur la base de donn�es derbyDB embarqu�e
-		connSql = DriverManager.getConnection(sb.toString());
+		connSql = DriverManager.getConnection(strConn.toString());
 	}
 
 	/**
@@ -152,7 +154,12 @@ public class DerbyUtil {
 		ij.runScript(connSql, is, "UTF-8", System.out, "UTF-8");
 	}
 
-	public Connection getConnection() {
+	public Connection getConnection() throws SQLException {
+		if (connSql != null) {
+			if (connSql.isValid(250) == false)	{		
+				connSql = DriverManager.getConnection(strConn.toString());
+			}
+		}
 		return connSql;
 	}
 
