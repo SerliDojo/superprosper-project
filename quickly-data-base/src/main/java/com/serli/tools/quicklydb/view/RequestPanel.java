@@ -30,10 +30,11 @@ public class RequestPanel extends JSplitPane {
 
 	private JButton btnExecute;
 	private JButton btnClear;
+	private JTextPane txtRequest;
 	private JTable resultTable;
+	private JScrollPane resultPane;
 
     public RequestPanel() {
-
         initComponents();
         initActions();
     }
@@ -44,7 +45,19 @@ public class RequestPanel extends JSplitPane {
 		btnExecute.setAction(actionMap.get("executeRequest"));
 		btnClear.setAction(actionMap.get("clearRequest"));
 	}
-		
+	
+	public void setResultTable(JTable table) {
+		resultTable = table;
+		resultPane.validate();
+	}
+	
+	public void clearRequest() {
+		txtRequest.setText("");
+	}
+	
+	public String getRequest() {
+		return txtRequest.getText();
+	}
 
     private void initComponents() {
     	setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -55,7 +68,7 @@ public class RequestPanel extends JSplitPane {
     	JPanel editorPane = new JPanel();	
     	editorPane.setBorder(new TitledBorder("Edit SQL request"));
     	editorPane.setLayout(new BorderLayout()); 	
-    	JTextPane txtRequest = new JTextPane();
+    	txtRequest = new JTextPane();
     	editorPane.add(txtRequest, BorderLayout.CENTER);  	
     	JPanel panel = new JPanel();
     	btnExecute = new JButton();
@@ -71,12 +84,11 @@ public class RequestPanel extends JSplitPane {
     	setTopComponent(editorPane);
 
     	// Resultat de la requette dans un tableau
-    	JScrollPane resultPane = new JScrollPane();
+    	resultPane = new JScrollPane();
     	resultTable = new JTable();
     	resultPane.setViewportView(resultTable);
     	
     	setBottomComponent(resultPane);
-
     }
 
 }

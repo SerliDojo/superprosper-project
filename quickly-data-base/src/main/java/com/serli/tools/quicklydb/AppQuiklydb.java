@@ -180,12 +180,12 @@ public class AppQuiklydb extends SingleFrameApplication {
 
 	@Action
 	public void executeRequest() {
-		System.out.println("executeRequest");
+		mainView.getRequestPanel().getRequest();
 	}
 
 	@Action
 	public void clearRequest() {
-		System.out.println("clearRequest");
+		mainView.getRequestPanel().clearRequest();
 	}
 
 	@Action
