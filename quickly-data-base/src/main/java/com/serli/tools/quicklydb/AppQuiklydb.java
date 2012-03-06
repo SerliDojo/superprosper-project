@@ -4,10 +4,15 @@ import java.awt.Dimension;
 import java.awt.TextArea;
 import java.io.File;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
+import javax.sql.RowSetMetaData;
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -57,10 +62,11 @@ public class AppQuiklydb extends SingleFrameApplication {
 
 		// Initialisation des chemins des scripts par défaut
 		String FILE_SEPARATOR = System.getProperty("file.separator");
-		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+		String path = getClass().getProtectionDomain().getCodeSource()
+				.getLocation().getFile();
 		if (path.endsWith(".jar")) {
 			path = path.substring(0, path.lastIndexOf(FILE_SEPARATOR) + 1);
-		} 
+		}
 
 		mainView.getScriptLauncherPanel().setPathCreateTables(
 				path + "create-tables.sql");
@@ -158,11 +164,13 @@ public class AppQuiklydb extends SingleFrameApplication {
 		String dbName = cfg.getDBName();
 		int port = cfg.getDBPort();
 		boolean create = cfg.getDBCreate();
+
 		StringBuilder sb = new StringBuilder("STARTING Derby server...");
 		sb.append("\r\n\tDBName = ").append(dbName);
 		sb.append("\r\n\tPort = ").append(port);
 		sb.append("\r\n\tcreate = ").append(create);
 		getLogger().log(Level.INFO, sb.toString());
+
 		StartDBServerAction srv = new StartDBServerAction(this, dbName, port,
 				create);
 		srv.execute();
@@ -180,7 +188,41 @@ public class AppQuiklydb extends SingleFrameApplication {
 
 	@Action
 	public void executeRequest() {
-		mainView.getRequestPanel().getRequest();
+		String sqlRequest = mainView.getRequestPanel().getRequest();
+		Statement statement = null;
+		boolean result = false;
+		try {
+			statement = this.dbu.getConnection().createStatement();
+			try {
+				result = statement.execute(sqlRequest);
+				if (result == true) {
+
+					ResultSet rs = statement.getResultSet();
+					ResultSetMetaData rsmd = rs.getMetaData();
+
+					// Affiche le nom des champs
+					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+						System.out.println(rsmd.getColumnName(i));
+					}
+
+					// Affiche le resultat de la requête
+					while (rs.next()) {
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							System.out.println(rs.getObject(i));
+						}
+					}
+				} else {
+					getLogger().log(Level.INFO,
+							"La requête a retourné aucun résultat.");
+				}
+			} catch (SQLException e) {
+				getLogger().log(Level.SEVERE,
+						"Erreur lors de l'exécution de la requête.", e);
+			}
+		} catch (SQLException e) {
+			getLogger().log(Level.SEVERE,
+					"Erreur lors de la préparation de la requête.", e);
+		}
 	}
 
 	@Action
@@ -191,7 +233,8 @@ public class AppQuiklydb extends SingleFrameApplication {
 	@Action
 	public void createTables() {
 		getLogger().log(Level.INFO, "Demande de création des tables.");
-		String scriptPath = mainView.getScriptLauncherPanel().getPathCreateTables();
+		String scriptPath = mainView.getScriptLauncherPanel()
+				.getPathCreateTables();
 		RunScriptAction rsa = new RunScriptAction(this, this.dbu, scriptPath);
 		rsa.execute();
 	}
@@ -199,7 +242,8 @@ public class AppQuiklydb extends SingleFrameApplication {
 	@Action
 	public void populateTables() {
 		getLogger().log(Level.INFO, "Demande de valorisation des tables.");
-		String scriptPath = mainView.getScriptLauncherPanel().getPathPopulateTables();
+		String scriptPath = mainView.getScriptLauncherPanel()
+				.getPathPopulateTables();
 		RunScriptAction rsa = new RunScriptAction(this, this.dbu, scriptPath);
 		rsa.execute();
 	}
@@ -207,45 +251,48 @@ public class AppQuiklydb extends SingleFrameApplication {
 	@Action
 	public void deleteTables() {
 		getLogger().log(Level.INFO, "Demande de suppression des tables.");
-		String scriptPath = mainView.getScriptLauncherPanel().getPathDeleteTables();
+		String scriptPath = mainView.getScriptLauncherPanel()
+				.getPathDeleteTables();
 		RunScriptAction rsa = new RunScriptAction(this, this.dbu, scriptPath);
 		rsa.execute();
 	}
 
 	@Action
-    public void chooseScriptCreateTables() {
-    	String path = mainView.getScriptLauncherPanel().getPathCreateTables();
-    	path = selectSrciptFile(path);
-    	mainView.getScriptLauncherPanel().setPathCreateTables(path);
-    }
+	public void chooseScriptCreateTables() {
+		String path = mainView.getScriptLauncherPanel().getPathCreateTables();
+		path = selectSrciptFile(path);
+		mainView.getScriptLauncherPanel().setPathCreateTables(path);
+	}
 
 	@Action
 	public void chooseScriptPopulateTables() {
-    	String path = mainView.getScriptLauncherPanel().getPathPopulateTables();
-    	path = selectSrciptFile(path);
-    	mainView.getScriptLauncherPanel().setPathPopulateTables(path);
+		String path = mainView.getScriptLauncherPanel().getPathPopulateTables();
+		path = selectSrciptFile(path);
+		mainView.getScriptLauncherPanel().setPathPopulateTables(path);
 	}
 
 	@Action
 	public void chooseScriptDeleteTables() {
-    	String path = mainView.getScriptLauncherPanel().getPathDeleteTables();
-    	path = selectSrciptFile(path);
-    	mainView.getScriptLauncherPanel().setPathDeleteTables(path);
+		String path = mainView.getScriptLauncherPanel().getPathDeleteTables();
+		path = selectSrciptFile(path);
+		mainView.getScriptLauncherPanel().setPathDeleteTables(path);
 	}
 
 	/**
-	 * Permet de sélectionner un fichier de type <i>.sql</i> et de retourner son chemin. 
-	 * @param path le chemin de départ de la selection
+	 * Permet de sélectionner un fichier de type <i>.sql</i> et de retourner son
+	 * chemin.
+	 * 
+	 * @param path
+	 *            le chemin de départ de la selection
 	 * @return le path du fichier sql selectionné.
 	 */
 	private String selectSrciptFile(String path) {
 		File file = new File(path);
 		JFileChooser fc = new JFileChooser(file);
-		
-	    fc.setFileFilter(new SqlFileFilter());
-	    fc.setFileView(new SqlFileView());
 
-		
+		fc.setFileFilter(new SqlFileFilter());
+		fc.setFileView(new SqlFileView());
+
 		int returnVal = fc.showOpenDialog(getMainFrame());
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fc.getSelectedFile();
@@ -289,7 +336,14 @@ public class AppQuiklydb extends SingleFrameApplication {
 	public Connection getDBConnection() {
 		Connection conn = null;
 		if (dbu != null) {
-			conn = dbu.getConnection();
+			try {
+				conn = dbu.getConnection();
+			} catch (SQLException e) {
+				getLogger()
+						.log(Level.SEVERE,
+								"Erreur lors de la récupération de la connexion sur la base de donnée.",
+								e);
+			}
 		}
 		return conn;
 	}
