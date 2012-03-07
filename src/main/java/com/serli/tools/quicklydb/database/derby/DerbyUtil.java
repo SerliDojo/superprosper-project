@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -19,20 +18,9 @@ import org.apache.derby.drda.NetworkServerControl;
 import org.apache.derby.tools.ij;
 
 /**
- * Permet de démarrer un serveur de base de données <b>Derby</b> de type MEMORY,
- * FILE ou NETWORK. Une fois le serveur créé, il est alors possible d'exécuter
- * des scripts SQL afin de créer les tables, valoriser les champs. <div> TODO :
- * <ul>
- * <li>Rendre public les méthodes <code>createEmbedded</code> et
- * <code>createNetwork</code> puis retourner la connexion
- * <code>java.sql.Connection</code></li>
- * <li>Ajouter un paramètre de type <code>java.sql.Connection</code> à la
- * méthode <code>executeScript(String resourcePath)</code></li>
- * <li>Ajouter les méthodes permettant de créer les
- * <code>java.sql.Connection</code> avec les mêmes signatures que les méthodes
- * <code>createEmbedded</code> et <code>createNetwork</code></li>
- * </ul>
- * </div>
+ * Permet de démarrer un serveur de base de données <b>Derby</b> de type embarqué mémoire ou
+ * fichier ou de type network. Une fois le serveur créé, il est alors possible d'exécuter
+ * des scripts SQL afin de créer les tables et de valoriser les champs.<br>
  * 
  * @author Pascal MERON
  * @version 1.1
@@ -48,14 +36,14 @@ public class DerbyUtil {
 	protected NetworkServerControl serverControl = null;
 
 	/**
-	 * Cr�ation d'un serveur de base de donn�e.
+	 * Création d'un serveur de base de donnée.
 	 * 
 	 * @param host
 	 *            Nom de la machine serveur
 	 * @param port
 	 *            Port de connexion cliente
 	 * @param dbName
-	 *            Nom de la base de donn�e � cr�er
+	 *            Nom de la base de donnée à créer
 	 * @throws Exception
 	 */
 	public DerbyUtil(String host, int port, String dbName, boolean create)
@@ -64,20 +52,29 @@ public class DerbyUtil {
 	}
 
 	/**
-	 * Cr�ation d'une base donn�es embarqu�e.
+	 * Création d'une base données embarquée.
 	 * 
 	 * @param dbName
-	 *            Nom de la base de donn�e � cr�er
-	 * @param typeEmbedded
+	 *            Nom de la base de donnéeà créer
+	 * @param typeEmbedded le type de base de donnée embarqué
 	 * @throws Exception
+	 * @see  {@link Embedded}
 	 */
 	public DerbyUtil(String dbName, Embedded typeEmbedded, boolean create)
 			throws Exception {
 		createEmbedded(dbName, typeEmbedded, create);
 	}
 
+	/**
+	 * Créé un serveur de base de donnée sur une machine.
+	 * @param host Nom de la machine serveur 
+	 * @param port port du serveur
+	 * @param dbName nom de la base de donnée
+	 * @param create <code>true</code> indique que la base de donnée doit être créée
+	 * @throws Exception
+	 */
 	private void createNetwork(String host, int port, String dbName, boolean create) throws Exception {
-		// D�marrage du serveur de base de donn�es Derby
+		// Démarrage du serveur de base de données Derby
 	    serverControl = new NetworkServerControl(InetAddress.getByName(host),port);
 	    serverControl.start(new PrintWriter(System.out));
 	    
@@ -95,7 +92,7 @@ public class DerbyUtil {
 	    
 	    } while (!pingOK && count < 3);
 	    	
-	    // Connexion cliente sur la base de donn�es derbyDB
+	    // Connexion cliente sur la base de données derbyDB
 		Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
 		strConn = new StringBuilder("jdbc:derby://");
 		strConn.append(host);
@@ -110,7 +107,7 @@ public class DerbyUtil {
 
 	private void createEmbedded(String dbName, Embedded typeEmbedded,
 			boolean create) throws Exception {
-		// D�marrage de la base de donn�es Derby embarqu�e
+		// Démarrage de la base de données Derby embarquée
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 		strConn = new StringBuilder("jdbc:derby:");
 		if (typeEmbedded == Embedded.MEMORY) {
@@ -119,13 +116,12 @@ public class DerbyUtil {
 		strConn.append(dbName);
 		if (create == true)
 			strConn.append(";create=true");
-		// Connexion sur la base de donn�es derbyDB embarqu�e
+		// Connexion sur la base de données derbyDB embarquée
 		connSql = DriverManager.getConnection(strConn.toString());
 	}
 
 	/**
-	 * Ex�cute un fichier de type script SQL sur la base de donn�es.
-	 * 
+	 * Exécute un fichier de type script SQL sur la base de données. 
 	 * @param resourcePath
 	 *            le chemin du fichier script SQL
 	 * @throws UnsupportedEncodingException
@@ -134,13 +130,12 @@ public class DerbyUtil {
 			throws UnsupportedEncodingException {
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 		InputStream is = cl.getResourceAsStream(resourcePath);
-		// Ex�cute le scipt SQL
+		// Exécute le scipt SQL
 		ij.runScript(connSql, is, "UTF-8", System.out, "UTF-8");
 	}
 
 	/**
-	 * Ex�cute un fichier de type script SQL sur la base de donn�es.
-	 * 
+	 * Exécute un fichier de type script SQL sur la base de données.
 	 * @param resourcePath
 	 *            le chemin du fichier script SQL
 	 * @throws UnsupportedEncodingException
@@ -150,7 +145,7 @@ public class DerbyUtil {
 	public void executeScript(String resourcePath)
 			throws UnsupportedEncodingException, FileNotFoundException {
 		InputStream is = new FileInputStream(resourcePath);
-		// Ex�cute le scipt SQL
+		// Exécute le scipt SQL
 		ij.runScript(connSql, is, "UTF-8", System.out, "UTF-8");
 	}
 
@@ -164,9 +159,8 @@ public class DerbyUtil {
 	}
 
 	/**
-	 * Ferme la connexion sql sur la base de donn�e puis le serveur network si
+	 * Ferme la connexion sql sur la base de donnée puis le serveur network si
 	 * il en existe un.
-	 * 
 	 * @throws Exception
 	 */
 	public void close() throws Exception {
