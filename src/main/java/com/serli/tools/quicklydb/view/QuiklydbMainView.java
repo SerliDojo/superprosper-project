@@ -2,6 +2,7 @@ package com.serli.tools.quicklydb.view;
 
 import javax.swing.ActionMap;
 import javax.swing.JButton;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 
@@ -66,10 +67,14 @@ public class QuiklydbMainView extends FrameView {
 				scriptLauncherPanel, resourceMap.getString("TabbedPanel.usfuls.tooltip", ""));
 		tabbedPane.addTab("", resourceMap.getIcon("RequestPanel.icon"),
 				requestPanel, resourceMap.getString("TabbedPanel.request.tooltip", ""));
-		tabbedPane.addTab("", resourceMap.getIcon("LoggingPanel.icon"),
-				loggingPanel, resourceMap.getString("TabbedPanel.logging.tooltip", ""));
+//		tabbedPane.addTab("", resourceMap.getIcon("LoggingPanel.icon"),
+//				loggingPanel, resourceMap.getString("TabbedPanel.logging.tooltip", ""));
 
-		setComponent(tabbedPane);
+		JSplitPane splitPane = new JSplitPane ();
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPane.setTopComponent(tabbedPane);
+		splitPane.setBottomComponent(loggingPanel);
+		setComponent(splitPane);
 	}
 
 	public JButton getBtnStartDB() {

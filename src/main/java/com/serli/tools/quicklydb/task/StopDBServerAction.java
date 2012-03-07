@@ -34,7 +34,7 @@ public class StopDBServerAction extends Task<Void, Void> {
 	
 	@Override
 	protected void failed(Throwable ex) {
-		logger.log(Level.INFO, "ERROR");
 		logger.log(Level.SEVERE, "Problème lors de l'arrêt du serveur Derby.", ex);
+		logger.log(Level.INFO, "ERROR");
 	}
 }

@@ -3,6 +3,7 @@ package com.serli.tools.quicklydb;
 import java.awt.Dimension;
 import java.awt.TextArea;
 import java.io.File;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -15,16 +16,19 @@ import javax.sql.RowSetMetaData;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 import org.myjavadev.utility.LoggingFormatter;
 import org.myjavadev.utility.TextAreaLogHandler;
+import org.myjavadev.utility.TextAreaOutputStream;
 
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
 import com.serli.tools.quicklydb.filter.SqlFileFilter;
 import com.serli.tools.quicklydb.task.RunScriptAction;
+import com.serli.tools.quicklydb.task.RunSqlStatement;
 import com.serli.tools.quicklydb.task.StartDBServerAction;
 import com.serli.tools.quicklydb.task.StopDBServerAction;
 import com.serli.tools.quicklydb.view.ConfigurationPanel;
@@ -81,7 +85,7 @@ public class AppQuiklydb extends SingleFrameApplication {
 	/**
 	 * Initialisation du système de log
 	 */
-	public void initLogger(TextArea txtLog) {
+	public void initLogger(JTextArea txtLog) {
 
 		try {
 			// String FILE_SEPARATOR = System.getProperty("file.separator");
@@ -171,8 +175,9 @@ public class AppQuiklydb extends SingleFrameApplication {
 		sb.append("\r\n\tcreate = ").append(create);
 		getLogger().log(Level.INFO, sb.toString());
 
+		TextAreaOutputStream taos = new  TextAreaOutputStream(mainView.getLoggingPanel().getTextArea());
 		StartDBServerAction srv = new StartDBServerAction(this, dbName, port,
-				create);
+				create, taos);
 		srv.execute();
 	}
 
@@ -189,39 +194,13 @@ public class AppQuiklydb extends SingleFrameApplication {
 	@Action
 	public void executeRequest() {
 		String sqlRequest = mainView.getRequestPanel().getRequest();
-		Statement statement = null;
-		boolean result = false;
+		RunSqlStatement rss;
 		try {
-			statement = this.dbu.getConnection().createStatement();
-			try {
-				result = statement.execute(sqlRequest);
-				if (result == true) {
-
-					ResultSet rs = statement.getResultSet();
-					ResultSetMetaData rsmd = rs.getMetaData();
-
-					// Affiche le nom des champs
-					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-						System.out.println(rsmd.getColumnName(i));
-					}
-
-					// Affiche le resultat de la requête
-					while (rs.next()) {
-						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-							System.out.println(rs.getObject(i));
-						}
-					}
-				} else {
-					getLogger().log(Level.INFO,
-							"La requête a retourné aucun résultat.");
-				}
-			} catch (SQLException e) {
-				getLogger().log(Level.SEVERE,
-						"Erreur lors de l'exécution de la requête.", e);
-			}
-		} catch (SQLException e) {
+			rss = new RunSqlStatement(this, this.dbu.getConnection(), sqlRequest, mainView.getRequestPanel());
+			rss.execute();
+		} catch (Exception e) {
 			getLogger().log(Level.SEVERE,
-					"Erreur lors de la préparation de la requête.", e);
+					"Erreur lors de la récupération de la connection sql.", e);
 		}
 	}
 
@@ -338,7 +317,7 @@ public class AppQuiklydb extends SingleFrameApplication {
 		if (dbu != null) {
 			try {
 				conn = dbu.getConnection();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				getLogger()
 						.log(Level.SEVERE,
 								"Erreur lors de la récupération de la connexion sur la base de donnée.",
