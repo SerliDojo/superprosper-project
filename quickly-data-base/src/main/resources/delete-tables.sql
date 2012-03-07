@@ -1,5 +1,5 @@
 ---
---- SUPPRESSION DE CLEFS ETRANGERES
+--- SUPPRESSION DES CLEFS ETRANGERES
 ---
 alter table CONTRAT drop constraint FK_CONTRAT_NUMERO;
 alter table PROSPECT drop constraint FK_PROSPECT_CLIENT;

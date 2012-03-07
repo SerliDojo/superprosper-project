@@ -45,7 +45,7 @@ public class RunScriptAction extends Task<Void, Void> {
 	
 	@Override
 	protected void failed(Throwable ex) {
-		logger.log(Level.INFO, "ERROR");
 		logger.log(Level.SEVERE, "Problème(s) lors de l'exécution du script.", ex);
+		logger.log(Level.INFO, "ERROR");
 	}
 }

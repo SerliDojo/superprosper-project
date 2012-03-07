@@ -31,7 +31,6 @@ public class RequestPanel extends JSplitPane {
 	private JButton btnExecute;
 	private JButton btnClear;
 	private JTextPane txtRequest;
-	private JTable resultTable;
 	private JScrollPane resultPane;
 
     public RequestPanel() {
@@ -46,8 +45,12 @@ public class RequestPanel extends JSplitPane {
 		btnClear.setAction(actionMap.get("clearRequest"));
 	}
 	
+	/**
+	 * Ajoute un tableau dans la zone de resultat
+	 * @param table un JTable result de la requête
+	 */
 	public void setResultTable(JTable table) {
-		resultTable = table;
+		resultPane.setViewportView(table);
 		resultPane.validate();
 	}
 	
@@ -85,9 +88,6 @@ public class RequestPanel extends JSplitPane {
 
     	// Resultat de la requette dans un tableau
     	resultPane = new JScrollPane();
-    	resultTable = new JTable();
-    	resultPane.setViewportView(resultTable);
-    	
     	setBottomComponent(resultPane);
     }
 

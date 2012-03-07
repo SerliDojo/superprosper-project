@@ -6,6 +6,8 @@ import java.awt.TextArea;
 import javax.swing.ActionMap;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import org.jdesktop.application.Application;
@@ -16,7 +18,7 @@ public class LoggingPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private TextArea txtLog = null;
+	private JTextArea txtLog = null;
 	private JButton btnClearLog = null;
 	
 	/**
@@ -37,14 +39,15 @@ public class LoggingPanel extends JPanel {
 	private void initComponents() {
 		setBorder( new TitledBorder("Application logs"));
 		setLayout(new BorderLayout(0, 0));
-		txtLog = new TextArea();
+		txtLog = new JTextArea();
+		JScrollPane scrollPane = new JScrollPane(txtLog);
 		txtLog.setEditable(false);
-		add(txtLog, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 		btnClearLog = new JButton();
 		add(btnClearLog, BorderLayout.SOUTH);
 	}
 
-	public TextArea getTextArea() {
+	public JTextArea getTextArea() {
 		return txtLog;
 	}
 	

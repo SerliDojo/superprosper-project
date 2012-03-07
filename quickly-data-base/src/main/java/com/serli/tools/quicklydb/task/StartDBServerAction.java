@@ -1,5 +1,6 @@
 package com.serli.tools.quicklydb.task;
 
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,19 +18,21 @@ public class StartDBServerAction extends Task<Connection, Void> {
 	private int port = 0;
 	private boolean create = true;
 	private DerbyUtil dbu = null;
+	private OutputStream out = null;
 
 	public StartDBServerAction(AppQuiklydb app, String dbName, int port,
-			boolean create) {
+			boolean create, OutputStream out) {
 		super(app);
 		logger = app.getLogger();
 		this.dbName = dbName;
 		this.port = port;
 		this.create = create;
+		this.out = out;
 	}
 
 	@Override
 	protected Connection doInBackground() throws Exception {
-		dbu = new DerbyUtil("localhost", port, dbName, create);
+		dbu = new DerbyUtil("localhost", port, dbName, create, out);
 		return dbu.getConnection();
 	}
 
@@ -47,8 +50,8 @@ public class StartDBServerAction extends Task<Connection, Void> {
 
 	@Override
 	protected void failed(Throwable ex) {
-		logger.log(Level.INFO, "ERROR");
 		logger.log(Level.SEVERE,
 				"Problème lors du démarrage du serveur Derby.", ex);
+		logger.log(Level.INFO, "ERROR");
 	}
 }
