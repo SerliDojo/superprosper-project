@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>superprosper-db</artifactId>
+	<artifactId>superprosper-database</artifactId>
 	<packaging>war</packaging>
 
 	<dependencies>

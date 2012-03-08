@@ -9,8 +9,8 @@
 
 	<modules>
 		<module>superprosper-mockup</module>
-		<module>superprosper-db</module>
-		<module>superprosper-jpa</module>
+		<module>superprosper-database</module>
+		<module>superprosper-persistence</module>
 	</modules>
 
 	<properties>

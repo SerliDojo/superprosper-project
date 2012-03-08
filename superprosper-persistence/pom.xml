@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>superprosper-jpa</artifactId>
+	<artifactId>superprosper-persistence</artifactId>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
