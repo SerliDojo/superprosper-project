@@ -1,4 +1,4 @@
-package com.serli.sample.superprosper;
+package com.serli.dojo.superprosper;
 
 import java.io.InputStream;
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package com.serli.sample.superprosper.domain;
+package com.serli.dojo.superprosper.domain;
 
 import java.io.Serializable;
 

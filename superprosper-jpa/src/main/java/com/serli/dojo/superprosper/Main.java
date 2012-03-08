@@ -1,13 +1,13 @@
-package com.serli.sample.superprosper;
+package com.serli.dojo.superprosper;
 
 import java.util.Date;
 
 import javax.persistence.EntityManager;
 
-import com.serli.sample.superprosper.domain.Agent;
-import com.serli.sample.superprosper.domain.Client;
-import com.serli.sample.superprosper.domain.Contrat;
-import com.serli.sample.superprosper.domain.Prospect;
+import com.serli.dojo.superprosper.domain.Agent;
+import com.serli.dojo.superprosper.domain.Client;
+import com.serli.dojo.superprosper.domain.Contrat;
+import com.serli.dojo.superprosper.domain.Prospect;
 
 public class Main {
 
