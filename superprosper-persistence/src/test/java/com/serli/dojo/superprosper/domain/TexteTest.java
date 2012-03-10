@@ -11,7 +11,7 @@ public class TexteTest extends PersistenceTest {
 	public void testLire() throws Exception {
 		insertDataSet("validData");
 
-		TexteId texteId = new TexteId();
+		Texte texteId = new Texte();
 		texteId.setCategorie("REGIONS");
 		texteId.setCode("NO");
 		texteId.setLangue("FR");

@@ -40,8 +40,8 @@ public class Contrat implements Serializable {
 	private Client client;
 
 	/** Produits souscrits dans le contrat (codifiés). */
-	@CollectionTable(name = "CONTRAT_PRODUIT", joinColumns = @JoinColumn(name = "NUMERO"))
-	@ElementCollection
+	@CollectionTable(name = "CONTRAT_PRODUIT", joinColumns = @JoinColumn(name = "CONTRAT"))
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "PRODUIT")
 	private List<String> produits;
 

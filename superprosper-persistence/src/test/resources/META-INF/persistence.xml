@@ -5,6 +5,7 @@
 	<persistence-unit name="superprosper-test-pu" transaction-type="RESOURCE_LOCAL">
 		<class>com.serli.dojo.superprosper.domain.Agent</class>
 		<class>com.serli.dojo.superprosper.domain.Client</class>
+		<class>com.serli.dojo.superprosper.domain.Contrat</class>
 		<class>com.serli.dojo.superprosper.domain.Prospection</class>
 		<class>com.serli.dojo.superprosper.domain.Texte</class>
 		<properties>

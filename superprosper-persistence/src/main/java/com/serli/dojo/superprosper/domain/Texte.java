@@ -6,7 +6,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 
 /**
  * Entité représentant les textes codifiés.
@@ -15,7 +14,6 @@ import javax.persistence.IdClass;
  * @author Laurent RUAUD
  */
 @Entity
-@IdClass(TexteId.class)
 public class Texte implements Serializable {
 
 	/** Numéro de série. */

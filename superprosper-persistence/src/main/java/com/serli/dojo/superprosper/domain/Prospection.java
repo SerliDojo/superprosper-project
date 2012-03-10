@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -16,18 +17,20 @@ import javax.persistence.TemporalType;
  * @author Pascal MERON
  * @author Laurent RUAUD
  */
-@Embeddable
+@Entity
 public class Prospection implements Serializable {
 
 	/** Numéro de série. */
 	private static final long serialVersionUID = -2119906144700797135L;
 
 	/** Date à laquelle le client a été contacté. */
+	@Id
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CONTACT", nullable = false)
 	private Date contact;
 
 	/** Client prospecté. */
+	@Id
 	@JoinColumn(name = "CLIENT", referencedColumnName = "NUMERO", nullable = false)
 	@ManyToOne
 	private Client client;
