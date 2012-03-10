@@ -11,6 +11,7 @@
 		<module>superprosper-mockup</module>
 		<module>superprosper-database</module>
 		<module>superprosper-persistence</module>
+		<module>superprosper-service</module>
 	</modules>
 
 	<properties>

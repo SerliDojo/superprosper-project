@@ -6,6 +6,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * Entité représentant les textes codifiés.
@@ -14,6 +15,7 @@ import javax.persistence.Id;
  * @author Laurent RUAUD
  */
 @Entity
+@NamedQuery(name = "pourCategorie", query = "select Texte t where t.categorie = :categorie and t.langue = :langue")
 public class Texte implements Serializable {
 
 	/** Numéro de série. */
