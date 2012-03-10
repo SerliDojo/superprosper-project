@@ -42,7 +42,7 @@ public abstract class PersistenceTest {
 		String jdbcPassword = entityManagerFactory.getProperties().get("javax.persistence.jdbc.password").toString();
 		dbTester = new JdbcDatabaseTester(jdbcDriver, jdbcUrl, jdbcUser, jdbcPassword);
 
-		String schemaSql = Resources.toString(Resources.getResource("schema.sql"), Charsets.UTF_8);
+		String schemaSql = Resources.toString(Resources.getResource("schema/schema.sql"), Charsets.UTF_8);
 		Iterable<String> schemaQueries = Splitter.on(';').trimResults().omitEmptyStrings().split(schemaSql);
 		for (String schemaQuery : schemaQueries) {
 			dbTester.getConnection().getConnection().createStatement().executeUpdate(schemaQuery);
@@ -68,7 +68,7 @@ public abstract class PersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		// entityManager.getTransaction().commit();
+//		entityManager.getTransaction().commit();
 	}
 
 	protected void insertDataSet(String dataSetName) throws Exception {
