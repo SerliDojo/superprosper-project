@@ -63,12 +63,14 @@ public abstract class PersistenceTest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = entityManagerFactory.createEntityManager();
-		// entityManager.getTransaction().begin();
+		entityManager.getTransaction().begin();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-//		entityManager.getTransaction().commit();
+		if (entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().commit();
+		}
 	}
 
 	protected void insertDataSet(String dataSetName) throws Exception {

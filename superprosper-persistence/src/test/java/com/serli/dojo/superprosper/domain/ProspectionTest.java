@@ -28,8 +28,6 @@ public class ProspectionTest extends PersistenceTest {
 
 	@Test
 	public void testPersister() {
-		entityManager.getTransaction().begin();
-
 		Client client = new Client();
 		client.setNom("NOM");
 		client.setPrenom("PRENOM");
