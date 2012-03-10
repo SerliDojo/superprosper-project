@@ -2,25 +2,44 @@ package com.serli.dojo.superprosper.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+
 /**
- * Classe d'identité représentant la clé primaire les textes codifiés.
+ * Entité représentant les textes codifiés.
  * 
  * @author Pascal MERON
  * @author Laurent RUAUD
  */
-public class TexteId implements Serializable {
+@Entity
+@IdClass(TexteId.class)
+public class Texte implements Serializable {
 
 	/** Numéro de série. */
-	private static final long serialVersionUID = 4108612999877230208L;
+	private static final long serialVersionUID = -4153413538164835805L;
 
 	/** Catégorie du texte codifié. */
+	@Id
+	@Column(length = 10, nullable = false)
 	private String categorie;
 
 	/** Code du texte codifié. */
+	@Id
+	@Column(length = 6, nullable = false)
 	private String code;
 
 	/** Langue du libellé du texte codifié. */
+	@Id
+	@Column(length = 2, nullable = false)
 	private String langue;
+
+	/** Libellé du texte codifié. */
+	@Basic
+	@Column(length = 200, nullable = false)
+	private String texte;
 
 	/**
 	 * Renvoie la categorie du texte codifié.
@@ -76,10 +95,28 @@ public class TexteId implements Serializable {
 		this.langue = langue;
 	}
 
+	/**
+	 * Renvoie le libellé du texte codifié.
+	 * 
+	 * @return le libellé du texte codifié
+	 */
+	public String getTexte() {
+		return texte;
+	}
+
+	/**
+	 * Définit le libellé du texte codifié.
+	 * 
+	 * @param texte le libellé du texte codifié
+	 */
+	public void setTexte(String texte) {
+		this.texte = texte;
+	}
+
 	@Override
 	public String toString() {
-		return new StringBuilder().append("TexteId [").append(categorie).append("|").append(code).append("|")
-				.append(langue).append("]").toString();
+		return new StringBuilder().append("Texte [").append(categorie).append("|").append(code).append("|")
+				.append(langue).append(" = ").append(texte).append("]").toString();
 	}
 
 	@Override
@@ -100,7 +137,7 @@ public class TexteId implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TexteId other = (TexteId) obj;
+		Texte other = (Texte) obj;
 		if (categorie == null) {
 			if (other.categorie != null)
 				return false;
@@ -118,4 +155,5 @@ public class TexteId implements Serializable {
 			return false;
 		return true;
 	}
+
 }
