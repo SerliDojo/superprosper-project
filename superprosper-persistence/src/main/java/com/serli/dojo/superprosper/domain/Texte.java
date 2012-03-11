@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
  * @author Laurent RUAUD
  */
 @Entity
-@NamedQuery(name = "pourCategorie", query = "select Texte t where t.categorie = :categorie and t.langue = :langue")
+@NamedQuery(name = "pourCategorie", query = "select t from Texte t where t.categorie = :categorie and t.langue = :langue")
 public class Texte implements Serializable {
 
 	/** Numéro de série. */
