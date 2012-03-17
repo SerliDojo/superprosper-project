@@ -1,6 +1,7 @@
 package com.serli.dojo.superprosper.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entité représentant un client de la société.
@@ -45,6 +48,21 @@ public class Client implements Serializable {
 	@Basic
 	@Column(length = 6, nullable = false)
 	private String region;
+
+	/** Date de naissance du client. */
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = true)
+	private Date naissance;
+
+	/** Adresse de résidence du client. */
+	@Basic
+	@Column(length = 300, nullable = true)
+	private String adresse;
+
+	/** Nombre de personnes composant le foyer du client. */
+	@Basic
+	@Column(nullable = true)
+	private Integer foyer;
 
 	/**
 	 * Renvoie la valeur de {@linkplain #numero numero}.
@@ -134,6 +152,60 @@ public class Client implements Serializable {
 	 */
 	public void setRegion(String region) {
 		this.region = region;
+	}
+
+	/**
+	 * Renvoie la valeur de {@linkplain #naissance naissance}.
+	 * 
+	 * @return la valeur de naissance
+	 */
+	public Date getNaissance() {
+		return naissance;
+	}
+
+	/**
+	 * Définit la valeur de {@linkplain #naissance naissance}.
+	 * 
+	 * @param naissance la valeur de naissance à définir
+	 */
+	public void setNaissance(Date naissance) {
+		this.naissance = naissance;
+	}
+
+	/**
+	 * Renvoie la valeur de {@linkplain #adresse adresse}.
+	 * 
+	 * @return la valeur de adresse
+	 */
+	public String getAdresse() {
+		return adresse;
+	}
+
+	/**
+	 * Définit la valeur de {@linkplain #adresse adresse}.
+	 * 
+	 * @param adresse la valeur de adresse à définir
+	 */
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	/**
+	 * Renvoie la valeur de {@linkplain #foyer foyer}.
+	 * 
+	 * @return la valeur de foyer
+	 */
+	public Integer getFoyer() {
+		return foyer;
+	}
+
+	/**
+	 * Définit la valeur de {@linkplain #foyer foyer}.
+	 * 
+	 * @param foyer la valeur de foyer à définir
+	 */
+	public void setFoyer(Integer foyer) {
+		this.foyer = foyer;
 	}
 
 	@Override
