@@ -42,72 +42,72 @@ public class Texte implements Serializable {
 	private String texte;
 
 	/**
-	 * Renvoie la categorie du texte codifié.
+	 * Renvoie la valeur de {@linkplain #categorie categorie}.
 	 * 
-	 * @return la categorie du texte codifié
+	 * @return la valeur de categorie
 	 */
 	public String getCategorie() {
 		return categorie;
 	}
 
 	/**
-	 * Définit la categorie du texte codifié.
+	 * Définit la valeur de {@linkplain #categorie categorie}.
 	 * 
-	 * @param categorie la categorie du texte codifié
+	 * @param categorie la valeur de categorie à définir
 	 */
 	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
 
 	/**
-	 * Renvoie le code du texte codifié.
+	 * Renvoie la valeur de {@linkplain #code code}.
 	 * 
-	 * @return le code du texte codifié
+	 * @return la valeur de code
 	 */
 	public String getCode() {
 		return code;
 	}
 
 	/**
-	 * Définit le code du texte codifié.
+	 * Définit la valeur de {@linkplain #code code}.
 	 * 
-	 * @param code le code du texte codifié
+	 * @param code la valeur de code à définir
 	 */
 	public void setCode(String code) {
 		this.code = code;
 	}
 
 	/**
-	 * Renvoie la langue du texte codifié.
+	 * Renvoie la valeur de {@linkplain #langue langue}.
 	 * 
-	 * @return la langue du texte codifié
+	 * @return la valeur de langue
 	 */
 	public String getLangue() {
 		return langue;
 	}
 
 	/**
-	 * Définit la langue du texte codifié.
+	 * Définit la valeur de {@linkplain #langue langue}.
 	 * 
-	 * @param langue la langue du texte codifié
+	 * @param langue la valeur de langue à définir
 	 */
 	public void setLangue(String langue) {
 		this.langue = langue;
 	}
 
 	/**
-	 * Renvoie le libellé du texte codifié.
+	 * Renvoie la valeur de {@linkplain #texte texte}.
 	 * 
-	 * @return le libellé du texte codifié
+	 * @return la valeur de texte
 	 */
 	public String getTexte() {
 		return texte;
 	}
 
 	/**
-	 * Définit le libellé du texte codifié.
+	 * Définit la valeur de {@linkplain #texte texte}.
 	 * 
-	 * @param texte le libellé du texte codifié
+	 * @param texte la valeur de texte à définir
 	 */
 	public void setTexte(String texte) {
 		this.texte = texte;

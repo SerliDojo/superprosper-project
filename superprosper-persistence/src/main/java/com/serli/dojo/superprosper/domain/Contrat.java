@@ -58,90 +58,90 @@ public class Contrat implements Serializable {
 	private Date effet;
 
 	/**
-	 * Renvoie l'identifiant du contrat.
+	 * Renvoie la valeur de {@linkplain #numero numero}.
 	 * 
-	 * @return l'identifiant du contrat
+	 * @return la valeur de numero
 	 */
 	public int getNumero() {
 		return numero;
 	}
 
 	/**
-	 * Définit l'identifiant du contrat.
+	 * Définit la valeur de {@linkplain #numero numero}.
 	 * 
-	 * @param numero l'identifiant du contrat
+	 * @param numero la valeur de numero à définir
 	 */
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
 	/**
-	 * Renvoie le client.
+	 * Renvoie la valeur de {@linkplain #client client}.
 	 * 
-	 * @return le client
+	 * @return la valeur de client
 	 */
 	public Client getClient() {
 		return client;
 	}
 
 	/**
-	 * Définit le client.
+	 * Définit la valeur de {@linkplain #client client}.
 	 * 
-	 * @param client le client
+	 * @param client la valeur de client à définir
 	 */
 	public void setClient(Client client) {
 		this.client = client;
 	}
 
 	/**
-	 * Renvoie les produits.
+	 * Renvoie la valeur de {@linkplain #produits produits}.
 	 * 
-	 * @return les produits
+	 * @return la valeur de produits
 	 */
 	public List<String> getProduits() {
 		return produits;
 	}
 
 	/**
-	 * Définit les produits.
+	 * Définit la valeur de {@linkplain #produits produits}.
 	 * 
-	 * @param produits les produits
+	 * @param produits la valeur de produits à définir
 	 */
 	public void setProduits(List<String> produits) {
 		this.produits = produits;
 	}
 
 	/**
-	 * Renvoie la date de signature.
+	 * Renvoie la valeur de {@linkplain #signature signature}.
 	 * 
-	 * @return la date de signature
+	 * @return la valeur de signature
 	 */
 	public Date getSignature() {
 		return signature;
 	}
 
 	/**
-	 * Définit la date de signature.
+	 * Définit la valeur de {@linkplain #signature signature}.
 	 * 
-	 * @param signature la date de signature
+	 * @param signature la valeur de signature à définir
 	 */
 	public void setSignature(Date signature) {
 		this.signature = signature;
 	}
 
 	/**
-	 * Renvoie la date d'effet.
+	 * Renvoie la valeur de {@linkplain #effet effet}.
 	 * 
-	 * @return la date d'effet
+	 * @return la valeur de effet
 	 */
 	public Date getEffet() {
 		return effet;
 	}
 
 	/**
-	 * Définit la date d'effet.
+	 * Définit la valeur de {@linkplain #effet effet}.
 	 * 
-	 * @param effet la date d'effet
+	 * @param effet la valeur de effet à définir
 	 */
 	public void setEffet(Date effet) {
 		this.effet = effet;

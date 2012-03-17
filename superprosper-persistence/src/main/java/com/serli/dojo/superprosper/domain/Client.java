@@ -47,90 +47,90 @@ public class Client implements Serializable {
 	private String region;
 
 	/**
-	 * Renvoie l'identifiant du client.
+	 * Renvoie la valeur de {@linkplain #numero numero}.
 	 * 
-	 * @return l'identifiant du client
+	 * @return la valeur de numero
 	 */
 	public Integer getNumero() {
 		return numero;
 	}
 
 	/**
-	 * Définit l'identifiant du client.
+	 * Définit la valeur de {@linkplain #numero numero}.
 	 * 
-	 * @param numero l'identifiant du client
+	 * @param numero la valeur de numero à définir
 	 */
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
 	/**
-	 * Renvoie le nom du client.
+	 * Renvoie la valeur de {@linkplain #nom nom}.
 	 * 
-	 * @return le nom du client
+	 * @return la valeur de nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 
 	/**
-	 * Définit le nom du client.
+	 * Définit la valeur de {@linkplain #nom nom}.
 	 * 
-	 * @param nom le nom du client
+	 * @param nom la valeur de nom à définir
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
 	/**
-	 * Renvoie le prénom du client.
+	 * Renvoie la valeur de {@linkplain #prenom prenom}.
 	 * 
-	 * @return le prénom du client
+	 * @return la valeur de prenom
 	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
 	/**
-	 * Définit le prénom du client.
+	 * Définit la valeur de {@linkplain #prenom prenom}.
 	 * 
-	 * @param prenom le prénom du client
+	 * @param prenom la valeur de prenom à définir
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
 	/**
-	 * Renvoie le numéro de téléphone du client.
+	 * Renvoie la valeur de {@linkplain #telephone telephone}.
 	 * 
-	 * @return numéro de téléphone du client
+	 * @return la valeur de telephone
 	 */
 	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
-	 * Définit le numéro de téléphone du client.
+	 * Définit la valeur de {@linkplain #telephone telephone}.
 	 * 
-	 * @param telephone le numéro de téléphone du client
+	 * @param telephone la valeur de telephone à définir
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
 	/**
-	 * Renvoie la région de résidence du client.
+	 * Renvoie la valeur de {@linkplain #region region}.
 	 * 
-	 * @return la région de résidence du client
+	 * @return la valeur de region
 	 */
 	public String getRegion() {
 		return region;
 	}
 
 	/**
-	 * Définit la région de résidence du client.
+	 * Définit la valeur de {@linkplain #region region}.
 	 * 
-	 * @param region la région de résidence du client
+	 * @param region la valeur de region à définir
 	 */
 	public void setRegion(String region) {
 		this.region = region;

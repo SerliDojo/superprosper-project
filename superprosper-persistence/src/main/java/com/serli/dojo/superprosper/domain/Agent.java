@@ -45,90 +45,90 @@ public class Agent implements Serializable {
 	private String courriel;
 
 	/**
-	 * Renvoie le matricule de l'agent.
+	 * Renvoie la valeur de {@linkplain #matricule matricule}.
 	 * 
-	 * @return le matricule de l'agent
+	 * @return la valeur de matricule
 	 */
 	public String getMatricule() {
 		return matricule;
 	}
 
 	/**
-	 * Définit le matricule de l'agent.
+	 * Définit la valeur de {@linkplain #matricule matricule}.
 	 * 
-	 * @param matricule le matricule de l'agent
+	 * @param matricule la valeur de matricule à définir
 	 */
 	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
 
 	/**
-	 * Renvoie le profil de l'agent.
+	 * Renvoie la valeur de {@linkplain #profil profil}.
 	 * 
-	 * @return le profil de l'agent
+	 * @return la valeur de profil
 	 */
 	public String getProfil() {
 		return profil;
 	}
 
 	/**
-	 * Définit le profil de l'agent.
+	 * Définit la valeur de {@linkplain #profil profil}.
 	 * 
-	 * @param matricule le profil de l'agent
+	 * @param profil la valeur de profil à définir
 	 */
 	public void setProfil(String profil) {
 		this.profil = profil;
 	}
 
 	/**
-	 * Renvoie le nom de l'agent.
+	 * Renvoie la valeur de {@linkplain #nom nom}.
 	 * 
-	 * @return le nom de l'agent
+	 * @return la valeur de nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 
 	/**
-	 * Définit le nom de l'agent.
+	 * Définit la valeur de {@linkplain #nom nom}.
 	 * 
-	 * @param matricule le nom de l'agent
+	 * @param nom la valeur de nom à définir
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
 	/**
-	 * Renvoie le prénom de l'agent.
+	 * Renvoie la valeur de {@linkplain #prenom prenom}.
 	 * 
-	 * @return le prénom de l'agent
+	 * @return la valeur de prenom
 	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
 	/**
-	 * Définit le prénom de l'agent.
+	 * Définit la valeur de {@linkplain #prenom prenom}.
 	 * 
-	 * @param matricule le prénom de l'agent
+	 * @param prenom la valeur de prenom à définir
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
 	/**
-	 * Renvoie le courriel de l'agent.
+	 * Renvoie la valeur de {@linkplain #courriel courriel}.
 	 * 
-	 * @return le courriel de l'agent
+	 * @return la valeur de courriel
 	 */
 	public String getCourriel() {
 		return courriel;
 	}
 
 	/**
-	 * Définit le courriel de l'agent.
+	 * Définit la valeur de {@linkplain #courriel courriel}.
 	 * 
-	 * @param matricule le courriel de l'agent
+	 * @param courriel la valeur de courriel à définir
 	 */
 	public void setCourriel(String courriel) {
 		this.courriel = courriel;

@@ -41,54 +41,54 @@ public class Prospection implements Serializable {
 	private Agent agent;
 
 	/**
-	 * Renvoie la date de contact.
+	 * Renvoie la valeur de {@linkplain #contact contact}.
 	 * 
-	 * @return la date de contact
+	 * @return la valeur de contact
 	 */
 	public Date getContact() {
 		return contact;
 	}
 
 	/**
-	 * Définit la date de contact.
+	 * Définit la valeur de {@linkplain #contact contact}.
 	 * 
-	 * @param contact la date de contact
+	 * @param contact la valeur de contact à définir
 	 */
 	public void setContact(Date contact) {
 		this.contact = contact;
 	}
 
 	/**
-	 * Renvoie le client.
+	 * Renvoie la valeur de {@linkplain #client client}.
 	 * 
-	 * @return le client
+	 * @return la valeur de client
 	 */
 	public Client getClient() {
 		return client;
 	}
 
 	/**
-	 * Définit le client.
+	 * Définit la valeur de {@linkplain #client client}.
 	 * 
-	 * @param client le client
+	 * @param client la valeur de client à définir
 	 */
 	public void setClient(Client client) {
 		this.client = client;
 	}
 
 	/**
-	 * Renvoie l'agent.
+	 * Renvoie la valeur de {@linkplain #agent agent}.
 	 * 
-	 * @return l'agent
+	 * @return la valeur de agent
 	 */
 	public Agent getAgent() {
 		return agent;
 	}
 
 	/**
-	 * Définit l'agent.
+	 * Définit la valeur de {@linkplain #agent agent}.
 	 * 
-	 * @param agent l'agent
+	 * @param agent la valeur de agent à définir
 	 */
 	public void setAgent(Agent agent) {
 		this.agent = agent;
