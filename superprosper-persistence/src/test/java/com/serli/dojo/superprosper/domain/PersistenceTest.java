@@ -11,8 +11,8 @@ import javax.persistence.Persistence;
 
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
-import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -74,7 +74,9 @@ public abstract class PersistenceTest {
 	}
 
 	protected void insertDataSet(String dataSetName) throws Exception {
-		IDataSet dataSet = new FlatXmlDataFileLoader().load("/" + dataSetName + ".xml");
+		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
+		IDataSet dataSet = builder.build(this.getClass().getClassLoader().getResource(dataSetName + ".xml"));
 		DatabaseOperation.CLEAN_INSERT.execute(dbTester.getConnection(), dataSet);
 	}
 }
