@@ -20,6 +20,8 @@ public class ClientTest extends PersistenceTest {
 		assertEquals("SHELDON", client1.getPrenom());
 		assertEquals("0123456789", client1.getTelephone());
 		assertEquals("IDF   ", client1.getRegion());
+		assertEquals(1, client1.getContrats().size());
+		assertEquals(1, client1.getProspections().size());
 
 		Client client2 = entityManager.find(Client.class, 234567);
 

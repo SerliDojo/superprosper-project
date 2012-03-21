@@ -2,13 +2,19 @@ package com.serli.dojo.superprosper.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,6 +25,11 @@ import javax.persistence.TemporalType;
  * @author Laurent RUAUD
  */
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "Rechercher", query = "select c from Client c where c.nom like :recherche or c.prenom like :recherche"),
+		@NamedQuery(name = "RechercherClientsSouscrits", query = "select c from Client c where c.contrats is not empty and c.nom like :recherche or c.prenom like :recherche"),
+		@NamedQuery(name = "RechercherClientsProspectes", query = "select c from Client c where c.contrats is empty and c.prospections is not empty and c.nom like :recherche or c.prenom like :recherche"),
+		@NamedQuery(name = "RechercherClientsNonProspectes", query = "select c from Client c where c.contrats is empty and c.prospections is empty and c.nom like :recherche or c.prenom like :recherche") })
 public class Client implements Serializable {
 
 	/** Numéro de série. */
@@ -63,6 +74,16 @@ public class Client implements Serializable {
 	@Basic
 	@Column(nullable = true)
 	private Integer foyer;
+
+	/** Contrats souscrits par ce client. */
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CLIENT")
+	private List<Contrat> contrats;
+
+	/** Prospections réalisées sur ce client. */
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CLIENT")
+	private List<Prospection> prospections;
 
 	/**
 	 * Renvoie la valeur de {@linkplain #numero numero}.
@@ -206,6 +227,42 @@ public class Client implements Serializable {
 	 */
 	public void setFoyer(Integer foyer) {
 		this.foyer = foyer;
+	}
+
+	/**
+	 * Renvoie la valeur de {@linkplain #contrats contrats}.
+	 * 
+	 * @return la valeur de contrats
+	 */
+	public List<Contrat> getContrats() {
+		return contrats;
+	}
+
+	/**
+	 * Définit la valeur de {@linkplain #contrats contrats}.
+	 * 
+	 * @param contrats la valeur de contrats à définir
+	 */
+	public void setContrats(List<Contrat> contrats) {
+		this.contrats = contrats;
+	}
+
+	/**
+	 * Renvoie la valeur de {@linkplain #prospections prospections}.
+	 * 
+	 * @return la valeur de prospections
+	 */
+	public List<Prospection> getProspections() {
+		return prospections;
+	}
+
+	/**
+	 * Définit la valeur de {@linkplain #prospections prospections}.
+	 * 
+	 * @param prospections la valeur de prospections à définir
+	 */
+	public void setProspections(List<Prospection> prospections) {
+		this.prospections = prospections;
 	}
 
 	@Override
