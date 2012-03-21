@@ -28,5 +28,18 @@
 			<version>4.1.1.Final</version>
 			<optional>true</optional>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.0</version>
+			<optional>test</optional>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<optional>test</optional>
+		</dependency>
 	</dependencies>
 </project>
