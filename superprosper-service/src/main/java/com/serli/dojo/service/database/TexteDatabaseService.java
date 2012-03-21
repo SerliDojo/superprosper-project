@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.serli.dojo.service.TexteService;
@@ -22,10 +20,7 @@ import com.serli.dojo.superprosper.domain.Texte;
  * 
  * @author Laurent RUAUD
  */
-public class TexteDatabaseService implements TexteService {
-
-	@PersistenceContext
-	EntityManager entityManager;
+public class TexteDatabaseService extends GenericDatabaseService implements TexteService {
 
 	@Override
 	public String lireTexte(String categorie, String code) {
@@ -39,7 +34,7 @@ public class TexteDatabaseService implements TexteService {
 		texteId.setCode(code);
 		texteId.setLangue(langue.toUpperCase());
 
-		Texte texte = entityManager.find(Texte.class, texteId);
+		Texte texte = getEntityManager().find(Texte.class, texteId);
 		return texte.getTexte();
 	}
 
@@ -52,7 +47,7 @@ public class TexteDatabaseService implements TexteService {
 	public Map<String, String> lireTextes(String categorie, String langue) {
 		Map<String, String> textes = Collections.emptyMap();
 
-		TypedQuery<Texte> query = entityManager.createNamedQuery("pourCategorie", Texte.class);
+		TypedQuery<Texte> query = getEntityManager().createNamedQuery("pourCategorie", Texte.class);
 		query.setParameter("categorie", categorie);
 		query.setParameter("langue", langue);
 
