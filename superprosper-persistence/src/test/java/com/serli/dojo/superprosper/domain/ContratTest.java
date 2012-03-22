@@ -1,9 +1,7 @@
 package com.serli.dojo.superprosper.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 import org.junit.Test;
@@ -28,22 +26,46 @@ public class ContratTest extends PersistenceTest {
 
 	@Test
 	public void testPersister() {
-		Client client = new Client();
-		client.setNom("NOM");
-		client.setPrenom("PRENOM");
-		client.setTelephone("0987654321");
-		client.setRegion("REGION");
+		Client client = Zombies.riseClient();
+		client.setNumero(null);
 
-		Contrat contrat = new Contrat();
-		contrat.setEffet(new GregorianCalendar(2011, 11, 3).getTime());
-		contrat.setSignature(new GregorianCalendar(2012, 1, 3).getTime());
+		Contrat contrat = Zombies.riseContrat();
+		contrat.setNumero(null);
 		contrat.setClient(client);
-		contrat.setProduits(Arrays.asList(new String[] { "AZERTY", "QSDFGH", "WXCVBN" }));
 
 		entityManager.persist(client);
 		entityManager.persist(contrat);
 		entityManager.getTransaction().commit();
 
+		assertNotNull(contrat.getNumero());
 		assertNotNull(contrat.getClient().getNumero());
+	}
+
+	@Test
+	public void testToString() {
+		Client client = Zombies.riseClient();
+		Contrat contrat = Zombies.riseContrat();
+		contrat.setClient(client);
+
+		assertTrue(contrat.toString().contains("67890"));
+		assertTrue(contrat.toString().contains("NOM"));
+	}
+
+	@Test
+	public void testEqualsHashCode() {
+		Contrat contrat1 = Zombies.riseContrat();
+		Contrat contrat2 = Zombies.riseContrat();
+
+		assertEquals(contrat1.hashCode(), contrat2.hashCode());
+		assertEquals(new Contrat().hashCode(), new Contrat().hashCode());
+
+		assertTrue(contrat1.equals(contrat1));
+		assertTrue(contrat1.equals(contrat2));
+		assertTrue(contrat2.equals(contrat1));
+
+		assertFalse(contrat1.equals(null));
+		assertFalse(contrat1.equals(contrat2.toString()));
+		assertFalse(contrat1.equals(new Contrat()));
+		assertFalse(new Contrat().equals(contrat1));
 	}
 }

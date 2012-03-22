@@ -1,7 +1,6 @@
 package com.serli.dojo.superprosper.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
@@ -37,15 +36,37 @@ public class ClientTest extends PersistenceTest {
 
 	@Test
 	public void testPersister() {
-		Client client = new Client();
-		client.setNom("NOM");
-		client.setPrenom("PRENOM");
-		client.setTelephone("0987654321");
-		client.setRegion("REGION");
+		Client client = Zombies.riseClient();
+		client.setNumero(null);
 
 		entityManager.persist(client);
 		entityManager.getTransaction().commit();
 
 		assertNotNull(client.getNumero());
+	}
+
+	@Test
+	public void testToString() {
+		Client client = Zombies.riseClient();
+
+		assertTrue(client.toString().contains("NOM"));
+	}
+
+	@Test
+	public void testEqualsHashCode() {
+		Client client1 = Zombies.riseClient();
+		Client client2 = Zombies.riseClient();
+
+		assertEquals(client1.hashCode(), client2.hashCode());
+		assertEquals(new Client().hashCode(), new Client().hashCode());
+
+		assertTrue(client1.equals(client1));
+		assertTrue(client1.equals(client2));
+		assertTrue(client2.equals(client1));
+
+		assertFalse(client1.equals(null));
+		assertFalse(client1.equals(client2.toString()));
+		assertFalse(client1.equals(new Client()));
+		assertFalse(new Client().equals(client1));
 	}
 }

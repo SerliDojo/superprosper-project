@@ -32,7 +32,7 @@ public class Contrat implements Serializable {
 	/** Numéro identifiant le contrat. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int numero;
+	private Integer numero;
 
 	/** Client ayant souscrit le contrat. */
 	@JoinColumn(name = "CLIENT", referencedColumnName = "NUMERO", nullable = false)
@@ -62,7 +62,7 @@ public class Contrat implements Serializable {
 	 * 
 	 * @return la valeur de numero
 	 */
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
@@ -71,7 +71,7 @@ public class Contrat implements Serializable {
 	 * 
 	 * @param numero la valeur de numero à définir
 	 */
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -160,7 +160,7 @@ public class Contrat implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numero;
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		return result;
 	}
 
@@ -173,7 +173,10 @@ public class Contrat implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Contrat other = (Contrat) obj;
-		if (numero != other.numero)
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
 			return false;
 		return true;
 	}

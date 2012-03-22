@@ -1,7 +1,6 @@
 package com.serli.dojo.superprosper.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -22,13 +21,33 @@ public class AgentTest extends PersistenceTest {
 
 	@Test
 	public void testPersister() {
-		Agent agent = new Agent();
-		agent.setMatricule("MATRICUL");
-		agent.setProfil("PROFIL");
-		agent.setNom("NOM");
-		agent.setPrenom("PRENOM");
-		agent.setCourriel("COURRIEL");
+		Agent agent = Zombies.riseAgent();
 
 		entityManager.persist(agent);
+	}
+
+	@Test
+	public void testToString() {
+		Agent agent = Zombies.riseAgent();
+
+		assertTrue(agent.toString().contains("NOM"));
+	}
+
+	@Test
+	public void testEqualsHashCode() {
+		Agent agent1 = Zombies.riseAgent();
+		Agent agent2 = Zombies.riseAgent();
+
+		assertEquals(agent1.hashCode(), agent2.hashCode());
+		assertEquals(new Agent().hashCode(), new Agent().hashCode());
+
+		assertTrue(agent1.equals(agent1));
+		assertTrue(agent1.equals(agent2));
+		assertTrue(agent2.equals(agent1));
+
+		assertFalse(agent1.equals(null));
+		assertFalse(agent1.equals(agent2.toString()));
+		assertFalse(agent1.equals(new Agent()));
+		assertFalse(new Agent().equals(agent1));
 	}
 }
