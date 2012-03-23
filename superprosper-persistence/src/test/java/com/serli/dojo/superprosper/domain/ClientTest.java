@@ -2,6 +2,8 @@ package com.serli.dojo.superprosper.domain;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.junit.Test;
@@ -36,8 +38,20 @@ public class ClientTest extends PersistenceTest {
 
 	@Test
 	public void testPersister() {
+		Agent agent = Zombies.riseAgent();
+		Contrat contrat = Zombies.riseContrat();
 		Client client = Zombies.riseClient();
+
+		Prospection prospection = new Prospection();
+		prospection.setAgent(agent);
+		prospection.setClient(client);
+		prospection.setContact(new Date());
+
+		contrat.setNumero(null);
 		client.setNumero(null);
+		client.setContrats(Arrays.asList(contrat));
+		contrat.setClient(client);
+		client.setProspections(Arrays.asList(prospection));
 
 		entityManager.persist(client);
 		entityManager.getTransaction().commit();

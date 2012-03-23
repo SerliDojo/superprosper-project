@@ -55,15 +55,82 @@ public class TexteTest extends PersistenceTest {
 		assertFalse(texte1.equals(texte2.toString()));
 		assertFalse(texte1.equals(new Texte()));
 		assertFalse(new Texte().equals(texte1));
-		
-		texte2 = Zombies.riseTexte();
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		Texte texte1 = Zombies.riseTexte();
+
+		Texte texte2 = Zombies.riseTexte();
 		texte2.setCategorie(null);
 		assertFalse(texte1.equals(texte2));
+
 		texte2 = Zombies.riseTexte();
 		texte2.setCode(null);
 		assertFalse(texte1.equals(texte2));
+
 		texte2 = Zombies.riseTexte();
 		texte2.setLangue(null);
 		assertFalse(texte1.equals(texte2));
+	}
+
+	@Test
+	public void testEqualsWithNullCategorie() {
+		Texte texte1 = Zombies.riseTexte();
+		texte1.setCategorie(null);
+
+		Texte texte2 = Zombies.riseTexte();
+		assertFalse(texte1.equals(texte2));
+
+		texte2.setCategorie(null);
+		assertTrue(texte1.equals(texte2));
+
+		texte2 = Zombies.riseTexte();
+		texte2.setCode(null);
+		assertFalse(texte1.equals(texte2));
+
+		texte2 = Zombies.riseTexte();
+		texte2.setLangue(null);
+		assertFalse(texte1.equals(texte2));
+	}
+
+	@Test
+	public void testEqualsWithNullCode() {
+		Texte texte1 = Zombies.riseTexte();
+		texte1.setCode(null);
+
+		Texte texte2 = Zombies.riseTexte();
+		assertFalse(texte1.equals(texte2));
+
+		texte2.setCategorie(null);
+		assertFalse(texte1.equals(texte2));
+
+		texte2 = Zombies.riseTexte();
+		texte2.setCode(null);
+		assertTrue(texte1.equals(texte2));
+
+		texte2 = Zombies.riseTexte();
+		texte2.setLangue(null);
+		assertFalse(texte1.equals(texte2));
+	}
+
+	@Test
+	public void testEqualsWithNullLangue() {
+		Texte texte1 = Zombies.riseTexte();
+		texte1.setLangue(null);
+
+		Texte texte2 = Zombies.riseTexte();
+		assertFalse(texte1.equals(texte2));
+
+		texte2.setCategorie(null);
+		assertFalse(texte1.equals(texte2));
+
+		texte2 = Zombies.riseTexte();
+		texte2.setCode(null);
+		assertFalse(texte1.equals(texte2));
+
+		texte2 = Zombies.riseTexte();
+		texte2.setLangue(null);
+		assertTrue(texte1.equals(texte2));
 	}
 }

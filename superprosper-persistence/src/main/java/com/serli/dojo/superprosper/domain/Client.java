@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -76,13 +75,11 @@ public class Client implements Serializable {
 	private Integer foyer;
 
 	/** Contrats souscrits par ce client. */
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CLIENT")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
 	private List<Contrat> contrats;
 
 	/** Prospections réalisées sur ce client. */
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CLIENT")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
 	private List<Prospection> prospections;
 
 	/**

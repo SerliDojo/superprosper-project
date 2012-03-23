@@ -1,6 +1,7 @@
 package com.serli.dojo.superprosper.domain;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Zombies {
@@ -22,6 +23,9 @@ public class Zombies {
 		client.setPrenom("PRENOM");
 		client.setTelephone("0987654321");
 		client.setRegion("REGION");
+		client.setFoyer(3);
+		client.setAdresse("ADRESSE");
+		client.setNaissance(new Date());
 		return client;
 	}
 

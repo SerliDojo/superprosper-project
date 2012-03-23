@@ -28,18 +28,10 @@ public class ProspectionTest extends PersistenceTest {
 
 	@Test
 	public void testPersister() {
-		Client client = new Client();
-		client.setNom("NOM");
-		client.setPrenom("PRENOM");
-		client.setTelephone("0987654321");
-		client.setRegion("REGION");
-
-		Agent agent = new Agent();
-		agent.setMatricule("MATRICUL");
-		agent.setProfil("PROFIL");
-		agent.setNom("NOM");
-		agent.setPrenom("PRENOM");
-		agent.setCourriel("COURRIEL");
+		Client client = Zombies.riseClient();
+		Agent agent = Zombies.riseAgent();
+		
+		client.setNumero(null);
 
 		Prospection prospection = new Prospection();
 		prospection.setContact(new GregorianCalendar(2011, 11, 3).getTime());
