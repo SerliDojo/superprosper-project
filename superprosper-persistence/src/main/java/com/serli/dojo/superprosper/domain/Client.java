@@ -25,11 +25,47 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "Rechercher", query = "select c from Client c where c.nom like :recherche or c.prenom like :recherche"),
-		@NamedQuery(name = "RechercherClientsSouscrits", query = "select c from Client c where c.contrats is not empty and c.nom like :recherche or c.prenom like :recherche"),
-		@NamedQuery(name = "RechercherClientsProspectes", query = "select c from Client c where c.contrats is empty and c.prospections is not empty and c.nom like :recherche or c.prenom like :recherche"),
-		@NamedQuery(name = "RechercherClientsNonProspectes", query = "select c from Client c where c.contrats is empty and c.prospections is empty and c.nom like :recherche or c.prenom like :recherche") })
+		@NamedQuery(name = "Rechercher", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE),
+		@NamedQuery(name = "RechercherClientsSouscrits", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS),
+		@NamedQuery(name = "RechercherClientsProspectes", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES),
+		@NamedQuery(name = "RechercherClientsNonProspectes", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES),
+		@NamedQuery(name = "RechercherParNumeroAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_TRI_PAR_NUMERO_ASC),
+		@NamedQuery(name = "RechercherParNumeroDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_TRI_PAR_NUMERO_DESC),
+		@NamedQuery(name = "RechercherParNomPrenomAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_TRI_PAR_NOM_PRENOM_ASC),
+		@NamedQuery(name = "RechercherParNomPrenomDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_TRI_PAR_NOM_PRENOM_DESC),
+		@NamedQuery(name = "RechercherParRegionAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_TRI_PAR_REGION_ASC),
+		@NamedQuery(name = "RechercherParRegionDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_TRI_PAR_REGION_DESC),
+		@NamedQuery(name = "RechercherClientsSouscritsParNumeroAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS + Client.JPQL_TRI_PAR_NUMERO_ASC),
+		@NamedQuery(name = "RechercherClientsSouscritsParNumeroDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS + Client.JPQL_TRI_PAR_NUMERO_DESC),
+		@NamedQuery(name = "RechercherClientsSouscritsParNomPrenomAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS + Client.JPQL_TRI_PAR_NOM_PRENOM_ASC),
+		@NamedQuery(name = "RechercherClientsSouscritsParNomPrenomDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS + Client.JPQL_TRI_PAR_NOM_PRENOM_DESC),
+		@NamedQuery(name = "RechercherClientsSouscritsParRegionAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS + Client.JPQL_TRI_PAR_REGION_ASC),
+		@NamedQuery(name = "RechercherClientsSouscritsParRegionDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_SOUSCRITS + Client.JPQL_TRI_PAR_REGION_DESC),
+		@NamedQuery(name = "RechercherClientsProspectesParNumeroAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES + Client.JPQL_TRI_PAR_NUMERO_ASC),
+		@NamedQuery(name = "RechercherClientsProspectesParNumeroDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES + Client.JPQL_TRI_PAR_NUMERO_DESC),
+		@NamedQuery(name = "RechercherClientsProspectesParNomPrenomAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES + Client.JPQL_TRI_PAR_NOM_PRENOM_ASC),
+		@NamedQuery(name = "RechercherClientsProspectesParNomPrenomDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES + Client.JPQL_TRI_PAR_NOM_PRENOM_DESC),
+		@NamedQuery(name = "RechercherClientsProspectesParRegionAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES + Client.JPQL_TRI_PAR_REGION_ASC),
+		@NamedQuery(name = "RechercherClientsProspectesParRegionDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_PROSPECTES + Client.JPQL_TRI_PAR_REGION_DESC),
+		@NamedQuery(name = "RechercherClientsNonProspectesParNumeroAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES + Client.JPQL_TRI_PAR_NUMERO_ASC),
+		@NamedQuery(name = "RechercherClientsNonProspectesParNumeroDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES + Client.JPQL_TRI_PAR_NUMERO_DESC),
+		@NamedQuery(name = "RechercherClientsNonProspectesParNomPrenomAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES + Client.JPQL_TRI_PAR_NOM_PRENOM_ASC),
+		@NamedQuery(name = "RechercherClientsNonProspectesParNomPrenomDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES + Client.JPQL_TRI_PAR_NOM_PRENOM_DESC),
+		@NamedQuery(name = "RechercherClientsNonProspectesParRegionAsc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES + Client.JPQL_TRI_PAR_REGION_ASC),
+		@NamedQuery(name = "RechercherClientsNonProspectesParRegionDesc", query = Client.JPQL_SELECTION + Client.JPQL_RECHERCHE + Client.JPQL_CRITERE_CLIENTS_NON_PROSPECTES + Client.JPQL_TRI_PAR_REGION_DESC) })
 public class Client implements Serializable {
+
+	static final String JPQL_SELECTION = "select c from Client c";
+	static final String JPQL_RECHERCHE = " where c.nom like :recherche or c.prenom like :recherche";
+	static final String JPQL_CRITERE_CLIENTS_SOUSCRITS = " and c.contrats is not empty";
+	static final String JPQL_CRITERE_CLIENTS_PROSPECTES = " and c.contrats is empty and c.prospections is not empty";
+	static final String JPQL_CRITERE_CLIENTS_NON_PROSPECTES = " and c.contrats is empty and c.prospections is empty";
+	static final String JPQL_TRI_PAR_NUMERO_ASC = " order by numero asc";
+	static final String JPQL_TRI_PAR_NUMERO_DESC = " order by numero desc";
+	static final String JPQL_TRI_PAR_NOM_PRENOM_ASC = " order by nom asc, prenom asc";
+	static final String JPQL_TRI_PAR_NOM_PRENOM_DESC = " order by nom desc, prenom desc";
+	static final String JPQL_TRI_PAR_REGION_ASC = " order by region asc";
+	static final String JPQL_TRI_PAR_REGION_DESC = " order by region desc";
 
 	/** Numéro de série. */
 	private static final long serialVersionUID = 239754410746100939L;
