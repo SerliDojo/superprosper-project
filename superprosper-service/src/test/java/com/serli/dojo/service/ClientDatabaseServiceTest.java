@@ -5,7 +5,9 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -36,83 +38,115 @@ public class ClientDatabaseServiceTest {
 	@Test
 	public void testRechercherClientsAvecRecherche() {
 		List<Client> clientsFictifs = creerClients(20);
-		TypedQuery<Client> query = mock(TypedQuery.class);
-		when(entityManager.createNamedQuery("Rechercher", Client.class)).thenReturn(query);
-		when(query.getResultList()).thenReturn(clientsFictifs);
+		TypedQuery<Client> query = mockNamedQuery("Rechercher", clientsFictifs);
 
 		List<Client> clientsLus = clientService.rechercherClients("MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
-		assertNotNull(clientsLus);
-		assertEquals(clientsFictifs.size(), clientsLus.size());
-		assertEquals(clientsFictifs.get(0).getNumero(), clientsLus.get(0).getNumero());
+		assertListEquals(clientsFictifs, clientsLus);
 	}
 
 	@Test
 	public void testRechercherClientsAvecRechercheEtFiltreClientsSouscris() {
 		List<Client> clientsFictifs = creerClients(10);
-		TypedQuery<Client> query = mock(TypedQuery.class);
-		when(entityManager.createNamedQuery("RechercherClientsSouscrits", Client.class)).thenReturn(query);
-		when(query.getResultList()).thenReturn(clientsFictifs);
+		TypedQuery<Client> query = mockNamedQuery("RechercherClientsSouscrits", clientsFictifs);
 
 		List<Client> clientsLus = clientService.rechercherClients(ClientService.Filtre.CLIENTS_SOUSCRITS, "MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
-		assertNotNull(clientsLus);
-		assertEquals(clientsFictifs.size(), clientsLus.size());
-		assertEquals(clientsFictifs.get(0).getNumero(), clientsLus.get(0).getNumero());
+		assertListEquals(clientsFictifs, clientsLus);
 	}
 
 	@Test
 	public void testRechercherClientsAvecRechercheEtFiltreClientsProspectes() {
 		List<Client> clientsFictifs = creerClients(10);
-		TypedQuery<Client> query = mock(TypedQuery.class);
-		when(entityManager.createNamedQuery("RechercherClientsProspectes", Client.class)).thenReturn(query);
-		when(query.getResultList()).thenReturn(clientsFictifs);
+		TypedQuery<Client> query = mockNamedQuery("RechercherClientsProspectes", clientsFictifs);
 
 		List<Client> clientsLus = clientService.rechercherClients(ClientService.Filtre.CLIENTS_PROSPECTES, "MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
-		assertNotNull(clientsLus);
-		assertEquals(clientsFictifs.size(), clientsLus.size());
-		assertEquals(clientsFictifs.get(0).getNumero(), clientsLus.get(0).getNumero());
+		assertListEquals(clientsFictifs, clientsLus);
 	}
 
 	@Test
 	public void testRechercherClientsAvecRechercheEtFiltreClientsNonProspectes() {
 		List<Client> clientsFictifs = creerClients(10);
-		TypedQuery<Client> query = mock(TypedQuery.class);
-		when(entityManager.createNamedQuery("RechercherClientsNonProspectes", Client.class)).thenReturn(query);
-		when(query.getResultList()).thenReturn(clientsFictifs);
+		TypedQuery<Client> query = mockNamedQuery("RechercherClientsNonProspectes", clientsFictifs);
 
-		List<Client> clientsLus = clientService.rechercherClients(ClientService.Filtre.CLIENTS_NON_PROSPECTES, "MOTCLE");
+		List<Client> clientsLus = clientService
+				.rechercherClients(ClientService.Filtre.CLIENTS_NON_PROSPECTES, "MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
-		assertNotNull(clientsLus);
-		assertEquals(clientsFictifs.size(), clientsLus.size());
-		assertEquals(clientsFictifs.get(0).getNumero(), clientsLus.get(0).getNumero());
+		assertListEquals(clientsFictifs, clientsLus);
 	}
 
 	@Test
 	public void testRechercherClientsAvecRechercheEtPagination() {
 		List<Client> clientsFictifs = creerClients(20);
-		TypedQuery<Client> query = mock(TypedQuery.class);
-		when(entityManager.createNamedQuery("Rechercher", Client.class)).thenReturn(query);
-		when(query.getResultList()).thenReturn(clientsFictifs);
+		TypedQuery<Client> query = mockNamedQuery("Rechercher", clientsFictifs);
 
 		List<Client> clientsLus = clientService.rechercherClients("MOTCLE", 3, 2);
 
 		verify(query).setParameter("recherche", "MOTCLE");
 		verify(query).setFirstResult(6);
 		verify(query).setMaxResults(2);
-		assertNotNull(clientsLus);
-		assertEquals(clientsFictifs.size(), clientsLus.size());
-		assertEquals(clientsFictifs.get(0).getNumero(), clientsLus.get(0).getNumero());
+		assertListEquals(clientsFictifs, clientsLus);
 	}
 
 	@Test
 	public void testRechercherClientsAvecRechercheEtFiltreEtPagination() {
-		// TODO Tester les 24 chemins
+		Map<ClientService.Tri, String> queryNamesTousClients = new HashMap<ClientService.Tri, String>();
+		queryNamesTousClients.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherParNumeroAsc");
+		queryNamesTousClients.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherParNumeroDesc");
+		queryNamesTousClients.put(ClientService.Tri.PAR_NOM_PRENOM_ASC, "RechercherParNomPrenomAsc");
+		queryNamesTousClients.put(ClientService.Tri.PAR_NOM_PRENOM_DESC, "RechercherParNomPrenomDesc");
+		queryNamesTousClients.put(ClientService.Tri.PAR_REGION_ASC, "RechercherParRegionAsc");
+		queryNamesTousClients.put(ClientService.Tri.PAR_REGION_DESC, "RechercherParRegionDesc");
+
+		Map<ClientService.Tri, String> queryNamesClientsSouscrits = new HashMap<ClientService.Tri, String>();
+		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsSouscritsParNumeroAsc");
+		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsSouscritsParNumeroDesc");
+		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NOM_PRENOM_ASC, "RechercherClientsSouscritsParNomPrenomAsc");
+		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NOM_PRENOM_DESC, "RechercherClientsSouscritsParNomPrenomDesc");
+		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsSouscritsParRegionAsc");
+		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsSouscritsParRegionDesc");
+
+		Map<ClientService.Tri, String> queryNamesClientsProspectes = new HashMap<ClientService.Tri, String>();
+		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
+		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
+		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_ASC, "RechercherClientsProspectesParNomPrenomAsc");
+		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_DESC, "RechercherClientsProspectesParNomPrenomDesc");
+		queryNamesClientsProspectes.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
+		queryNamesClientsProspectes.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
+
+		Map<ClientService.Tri, String> queryNamesClientsNonProspectes = new HashMap<ClientService.Tri, String>();
+		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsNonProspectesParNumeroAsc");
+		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsNonProspectesParNumeroDesc");
+		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_ASC, "RechercherClientsNonProspectesParNomPrenomAsc");
+		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_DESC, "RechercherClientsNonProspectesParNomPrenomDesc");
+		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsNonProspectesParRegionAsc");
+		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsNonProspectesParRegionDesc");
+
+		Map<ClientService.Filtre, Map<ClientService.Tri, String>> queryNames = new HashMap<ClientService.Filtre, Map<ClientService.Tri, String>>();
+		queryNames.put(ClientService.Filtre.TOUS_CLIENTS, queryNamesTousClients);
+		queryNames.put(ClientService.Filtre.CLIENTS_SOUSCRITS, queryNamesClientsSouscrits);
+		queryNames.put(ClientService.Filtre.CLIENTS_PROSPECTES, queryNamesClientsProspectes);
+		queryNames.put(ClientService.Filtre.CLIENTS_NON_PROSPECTES, queryNamesClientsNonProspectes);
+
+		for (ClientService.Filtre filtre : ClientService.Filtre.values()) {
+			for (ClientService.Tri tri : ClientService.Tri.values()) {
+				List<Client> clientsFictifs = creerClients(20);
+				reset(entityManager);
+				TypedQuery<Client> query = mockNamedQuery(queryNames.get(filtre).get(tri), clientsFictifs);
+
+				List<Client> clientsLus = clientService.rechercherClients(filtre, "MOTCLE", 3, 2, tri);
+
+				verify(query).setParameter("recherche", "MOTCLE");
+				verify(query).setFirstResult(6);
+				verify(query).setMaxResults(2);
+				assertListEquals(clientsFictifs, clientsLus);
+			}
+		}
 	}
 
 	@Test
@@ -157,5 +191,18 @@ public class ClientDatabaseServiceTest {
 		}
 
 		return clients;
+	}
+
+	private TypedQuery<Client> mockNamedQuery(String queryName, List<Client> clients) {
+		TypedQuery<Client> query = mock(TypedQuery.class);
+		when(entityManager.createNamedQuery(queryName, Client.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(clients);
+		return query;
+	}
+
+	private void assertListEquals(List<Client> clientsFictifs, List<Client> clientsLus) {
+		assertNotNull(clientsLus);
+		assertEquals(clientsFictifs.size(), clientsLus.size());
+		assertEquals(clientsFictifs.get(0).getNumero(), clientsLus.get(0).getNumero());
 	}
 }
