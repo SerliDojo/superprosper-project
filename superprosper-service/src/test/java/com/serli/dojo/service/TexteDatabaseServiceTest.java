@@ -18,8 +18,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.serli.dojo.service.database.TexteDatabaseService;
 import com.serli.dojo.superprosper.domain.Texte;
+import com.serli.dojo.superprosper.service.database.TexteDatabaseService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TexteDatabaseServiceTest {

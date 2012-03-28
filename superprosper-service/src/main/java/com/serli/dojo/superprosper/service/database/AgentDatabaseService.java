@@ -1,7 +1,7 @@
-package com.serli.dojo.service.database;
+package com.serli.dojo.superprosper.service.database;
 
-import com.serli.dojo.service.AgentService;
 import com.serli.dojo.superprosper.domain.Agent;
+import com.serli.dojo.superprosper.service.AgentService;
 
 /**
  * Implémentation du service de lecture des agents prenant comme source une base

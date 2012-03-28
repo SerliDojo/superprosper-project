@@ -1,4 +1,4 @@
-package com.serli.dojo.service.database;
+package com.serli.dojo.superprosper.service.database;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
-import com.serli.dojo.service.TexteService;
 import com.serli.dojo.superprosper.domain.Texte;
+import com.serli.dojo.superprosper.service.TexteService;
 
 /**
  * Implémentation du service de lecture des textes codifiés prenant comme source

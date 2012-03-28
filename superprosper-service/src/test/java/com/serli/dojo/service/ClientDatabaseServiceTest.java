@@ -21,10 +21,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.serli.dojo.service.database.ClientDatabaseService;
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.domain.Contrat;
 import com.serli.dojo.superprosper.domain.Prospection;
+import com.serli.dojo.superprosper.service.ClientService;
+import com.serli.dojo.superprosper.service.database.ClientDatabaseService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientDatabaseServiceTest {

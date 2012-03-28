@@ -1,4 +1,4 @@
-package com.serli.dojo.service.database;
+package com.serli.dojo.superprosper.service.database;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +8,10 @@ import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-import com.serli.dojo.service.ClientService;
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.domain.Contrat;
 import com.serli.dojo.superprosper.domain.Prospection;
+import com.serli.dojo.superprosper.service.ClientService;
 
 /**
  * Implémentation du service de gestion des clients prenant comme source une

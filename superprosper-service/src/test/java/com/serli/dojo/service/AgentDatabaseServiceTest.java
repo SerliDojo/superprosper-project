@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.serli.dojo.service.database.AgentDatabaseService;
 import com.serli.dojo.superprosper.domain.Agent;
+import com.serli.dojo.superprosper.service.database.AgentDatabaseService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AgentDatabaseServiceTest {
