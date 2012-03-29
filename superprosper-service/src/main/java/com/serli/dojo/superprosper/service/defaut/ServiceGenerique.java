@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.service.database;
+package com.serli.dojo.superprosper.service.defaut;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

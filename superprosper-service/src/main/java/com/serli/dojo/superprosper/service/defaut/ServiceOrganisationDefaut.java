@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.service.database;
+package com.serli.dojo.superprosper.service.defaut;
 
 import com.serli.dojo.superprosper.domain.Agent;
 import com.serli.dojo.superprosper.service.ServiceOrganisation;

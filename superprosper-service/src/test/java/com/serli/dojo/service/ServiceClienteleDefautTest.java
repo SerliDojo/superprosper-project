@@ -20,7 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.service.ServiceClientele;
-import com.serli.dojo.superprosper.service.database.ServiceClienteleDefaut;
+import com.serli.dojo.superprosper.service.defaut.ServiceClienteleDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceClienteleDefautTest {

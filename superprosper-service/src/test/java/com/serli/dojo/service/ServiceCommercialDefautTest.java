@@ -20,7 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.domain.Contrat;
 import com.serli.dojo.superprosper.domain.Prospection;
-import com.serli.dojo.superprosper.service.database.ServiceCommercialDefaut;
+import com.serli.dojo.superprosper.service.defaut.ServiceCommercialDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceCommercialDefautTest {

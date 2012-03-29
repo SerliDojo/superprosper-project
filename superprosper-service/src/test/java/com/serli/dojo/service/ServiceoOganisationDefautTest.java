@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Agent;
-import com.serli.dojo.superprosper.service.database.ServiceOrganisationDefaut;
+import com.serli.dojo.superprosper.service.defaut.ServiceOrganisationDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceoOganisationDefautTest {

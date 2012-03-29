@@ -19,7 +19,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Texte;
-import com.serli.dojo.superprosper.service.database.ServiceCodificationDefaut;
+import com.serli.dojo.superprosper.service.defaut.ServiceCodificationDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceCodificationDefautTest {
