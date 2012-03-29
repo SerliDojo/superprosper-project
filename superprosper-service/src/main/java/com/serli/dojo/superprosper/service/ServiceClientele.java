@@ -3,8 +3,6 @@ package com.serli.dojo.superprosper.service;
 import java.util.List;
 
 import com.serli.dojo.superprosper.domain.Client;
-import com.serli.dojo.superprosper.domain.Contrat;
-import com.serli.dojo.superprosper.domain.Prospection;
 
 /**
  * Contrat de service pour la récupération des informations concernant les
@@ -106,27 +104,5 @@ public interface ServiceClientele {
 	 * @param client client à modifier
 	 */
 	void modifierClient(Client client);
-
-	/**
-	 * Ajoute une prospection à un client.
-	 * 
-	 * Cette méthode vérifie quelques règles de gestion avant d'effectuer
-	 * l'ajout.
-	 * 
-	 * @param prospection prospection à ajouter
-	 * @param client client auquel ajouter le contrat
-	 */
-	void ajouterProspection(Prospection prospection, Client client);
-
-	/**
-	 * Ajoute un contrat à un client.
-	 * 
-	 * Cette méthode vérifie plusieurs règles de gestion avant d'effectuer
-	 * l'ajout.
-	 * 
-	 * @param contrat contrat à ajouter
-	 * @param client client auquel ajouter le contrat
-	 */
-	void ajouterContrat(Contrat contrat, Client client);
 
 }

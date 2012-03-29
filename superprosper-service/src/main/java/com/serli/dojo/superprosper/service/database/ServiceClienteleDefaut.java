@@ -6,11 +6,7 @@ import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import com.serli.dojo.superprosper.domain.Client;
-import com.serli.dojo.superprosper.domain.Contrat;
-import com.serli.dojo.superprosper.domain.Prospection;
 import com.serli.dojo.superprosper.service.ServiceClientele;
 
 /**
@@ -45,13 +41,15 @@ public class ServiceClienteleDefaut extends ServiceGenerique implements ServiceC
 
 		Map<ServiceClientele.Tri, String> queryNamesClientsProspectes = new HashMap<ServiceClientele.Tri, String>();
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
-		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC,
+				"RechercherClientsProspectesParNumeroDesc");
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsProspectesParNomPrenomAsc");
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsProspectesParNomPrenomDesc");
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
-		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC,
+				"RechercherClientsProspectesParRegionDesc");
 
 		Map<ServiceClientele.Tri, String> queryNamesClientsNonProspectes = new HashMap<ServiceClientele.Tri, String>();
 		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC,
@@ -131,42 +129,6 @@ public class ServiceClienteleDefaut extends ServiceGenerique implements ServiceC
 
 	@Override
 	public void modifierClient(Client client) {
-		getEntityManager().merge(client);
-	}
-
-	@Override
-	public void ajouterProspection(Prospection prospection, Client client) {
-		// Aucune prospection ne doit avoir été effectuée à la même date
-		List<Prospection> prospectionsPrecedentes = client.getProspections();
-		for (Prospection prospectionPrecedente : prospectionsPrecedentes) {
-			if (DateUtils.isSameDay(prospectionPrecedente.getContact(), prospection.getContact())) {
-				throw new RuntimeException("Une prospection a déjà eu lieu à la même date.");
-			}
-		}
-
-		prospection.setClient(client);
-		client.getProspections().add(prospection);
-
-		getEntityManager().persist(prospection);
-		getEntityManager().merge(client);
-	}
-
-	@Override
-	public void ajouterContrat(Contrat contrat, Client client) {
-		// Une prospection doit avoir été effectuée à la date de la signature
-		boolean prospecteAuMemeJour = false;
-		List<Prospection> prospections = client.getProspections();
-		for (Prospection prospection : prospections) {
-			prospecteAuMemeJour |= DateUtils.isSameDay(prospection.getContact(), contrat.getSignature());
-		}
-		if (!prospecteAuMemeJour) {
-			throw new RuntimeException("Aucune prospection n'a eu lieu à la date de signature.");
-		}
-
-		contrat.setClient(client);
-		client.getContrats().add(contrat);
-
-		getEntityManager().persist(contrat);
 		getEntityManager().merge(client);
 	}
 

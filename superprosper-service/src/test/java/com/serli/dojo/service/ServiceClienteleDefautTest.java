@@ -4,10 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +19,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Client;
-import com.serli.dojo.superprosper.domain.Contrat;
-import com.serli.dojo.superprosper.domain.Prospection;
 import com.serli.dojo.superprosper.service.ServiceClientele;
 import com.serli.dojo.superprosper.service.database.ServiceClienteleDefaut;
 
@@ -79,8 +74,8 @@ public class ServiceClienteleDefautTest {
 		List<Client> clientsFictifs = creerClients(10);
 		TypedQuery<Client> query = mockNamedQuery("RechercherClientsNonProspectes", clientsFictifs);
 
-		List<Client> clientsLus = clientService
-				.rechercherClients(ServiceClientele.Filtre.CLIENTS_NON_PROSPECTES, "MOTCLE");
+		List<Client> clientsLus = clientService.rechercherClients(ServiceClientele.Filtre.CLIENTS_NON_PROSPECTES,
+				"MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
 		assertListEquals(clientsFictifs, clientsLus);
@@ -121,13 +116,15 @@ public class ServiceClienteleDefautTest {
 
 		Map<ServiceClientele.Tri, String> queryNamesClientsProspectes = new HashMap<ServiceClientele.Tri, String>();
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
-		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC,
+				"RechercherClientsProspectesParNumeroDesc");
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsProspectesParNomPrenomAsc");
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsProspectesParNomPrenomDesc");
 		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
-		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC,
+				"RechercherClientsProspectesParRegionDesc");
 
 		Map<ServiceClientele.Tri, String> queryNamesClientsNonProspectes = new HashMap<ServiceClientele.Tri, String>();
 		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC,
@@ -184,98 +181,6 @@ public class ServiceClienteleDefautTest {
 		clientService.modifierClient(clientFictif);
 
 		verify(entityManager).merge(clientFictif);
-	}
-
-	@Test
-	public void testAjouterContrat() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(Arrays.asList(prospection));
-		client.setContrats(new ArrayList<Contrat>());
-
-		Contrat contrat = new Contrat();
-		contrat.setSignature(calendar.getTime());
-
-		clientService.ajouterContrat(contrat, client);
-
-		assertTrue(client.getContrats().contains(contrat));
-		verify(entityManager).persist(contrat);
-	}
-
-	@Test
-	public void testAjouterContratSansProspection() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(Arrays.asList(prospection));
-		client.setContrats(new ArrayList<Contrat>());
-
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Contrat contrat = new Contrat();
-		contrat.setSignature(calendar.getTime());
-
-		try {
-			clientService.ajouterContrat(contrat, client);
-			fail("Une exception aurait du être levée si aucune prospection n'a eu lieu à la date de signature.");
-		} catch (Exception e) {
-			assertNotNull(e.getMessage());
-		}
-
-		assertFalse(client.getContrats().contains(contrat));
-		verify(entityManager, never()).persist(contrat);
-	}
-
-	@Test
-	public void testAjouterProspection() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospectionExistance = new Prospection();
-		prospectionExistance.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(new ArrayList<Prospection>());
-		client.getProspections().add(prospectionExistance);
-
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
-
-		clientService.ajouterProspection(prospection, client);
-
-		assertTrue(client.getProspections().contains(prospection));
-		verify(entityManager).persist(prospection);
-	}
-
-	@Test
-	public void testAjouterProspectionEnDouble() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospectionExistance = new Prospection();
-		prospectionExistance.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(new ArrayList<Prospection>());
-		client.getProspections().add(prospectionExistance);
-
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
-
-		try {
-			clientService.ajouterProspection(prospection, client);
-			fail("Une exception aurait du être levée si une prospection a déjà eu lieu à la même date.");
-		} catch (Exception e) {
-			assertNotNull(e.getMessage());
-		}
-
-		assertFalse(client.getProspections().contains(prospection));
-		verify(entityManager, never()).persist(prospection);
 	}
 
 	private Client creerClient(String base) {
