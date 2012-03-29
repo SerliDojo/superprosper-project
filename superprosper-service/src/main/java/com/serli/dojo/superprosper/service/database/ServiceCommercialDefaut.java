@@ -1,12 +1,11 @@
 package com.serli.dojo.superprosper.service.database;
 
-import java.util.List;
-
-import org.apache.commons.lang3.time.DateUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.domain.Contrat;
 import com.serli.dojo.superprosper.domain.Prospection;
+import com.serli.dojo.superprosper.regle.ReglesCommerciales;
 import com.serli.dojo.superprosper.service.ServiceCommercial;
 
 /**
@@ -22,12 +21,8 @@ public class ServiceCommercialDefaut extends ServiceGenerique implements Service
 	@Override
 	public void ajouterProspection(Prospection prospection, Client client) {
 		// Aucune prospection ne doit avoir été effectuée à la même date
-		List<Prospection> prospectionsPrecedentes = client.getProspections();
-		for (Prospection prospectionPrecedente : prospectionsPrecedentes) {
-			if (DateUtils.isSameDay(prospectionPrecedente.getContact(), prospection.getContact())) {
-				throw new RuntimeException("Une prospection a déjà eu lieu à la même date.");
-			}
-		}
+		ReglesCommerciales.PAS_DEUX_PROSPECTION_A_LA_MEME_DATE.verifier(new ImmutablePair<Prospection, Client>(
+				prospection, client));
 
 		prospection.setClient(client);
 		client.getProspections().add(prospection);
@@ -39,14 +34,8 @@ public class ServiceCommercialDefaut extends ServiceGenerique implements Service
 	@Override
 	public void ajouterContrat(Contrat contrat, Client client) {
 		// Une prospection doit avoir été effectuée à la date de la signature
-		boolean prospecteAuMemeJour = false;
-		List<Prospection> prospections = client.getProspections();
-		for (Prospection prospection : prospections) {
-			prospecteAuMemeJour |= DateUtils.isSameDay(prospection.getContact(), contrat.getSignature());
-		}
-		if (!prospecteAuMemeJour) {
-			throw new RuntimeException("Aucune prospection n'a eu lieu à la date de signature.");
-		}
+		ReglesCommerciales.PROSPECTION_OBLIGATOIRE_AVANT_CONTRAT.verifier(new ImmutablePair<Contrat, Client>(contrat,
+				client));
 
 		contrat.setClient(client);
 		client.getContrats().add(contrat);
