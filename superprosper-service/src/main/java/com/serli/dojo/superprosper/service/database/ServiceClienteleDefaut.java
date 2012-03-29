@@ -11,67 +11,66 @@ import org.apache.commons.lang3.time.DateUtils;
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.domain.Contrat;
 import com.serli.dojo.superprosper.domain.Prospection;
-import com.serli.dojo.superprosper.service.ClientService;
+import com.serli.dojo.superprosper.service.ServiceClientele;
 
 /**
- * Implémentation du service de gestion des clients prenant comme source une
- * base de données.
+ * Implémentation du service de gestion des clients.
  * 
  * Cette classe utilise l'injection de gestionnaire d'entité telle que proposée
  * par JPA.
  * 
  * @author Laurent RUAUD
  */
-public class ClientDatabaseService extends GenericDatabaseService implements ClientService {
+public class ServiceClienteleDefaut extends ServiceGenerique implements ServiceClientele {
 
-	private static final Map<ClientService.Filtre, Map<ClientService.Tri, String>> queryNames = new HashMap<ClientService.Filtre, Map<ClientService.Tri, String>>();
+	private static final Map<ServiceClientele.Filtre, Map<ServiceClientele.Tri, String>> queryNames = new HashMap<ServiceClientele.Filtre, Map<ServiceClientele.Tri, String>>();
 	static {
-		Map<ClientService.Tri, String> queryNamesTousClients = new HashMap<ClientService.Tri, String>();
-		queryNamesTousClients.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherParNumeroAsc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherParNumeroDesc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_NOM_PRENOM_ASC, "RechercherParNomPrenomAsc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_NOM_PRENOM_DESC, "RechercherParNomPrenomDesc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_REGION_ASC, "RechercherParRegionAsc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_REGION_DESC, "RechercherParRegionDesc");
+		Map<ServiceClientele.Tri, String> queryNamesTousClients = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherParNumeroAsc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherParNumeroDesc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC, "RechercherParNomPrenomAsc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC, "RechercherParNomPrenomDesc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherParRegionAsc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherParRegionDesc");
 
-		Map<ClientService.Tri, String> queryNamesClientsSouscrits = new HashMap<ClientService.Tri, String>();
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsSouscritsParNumeroAsc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsSouscritsParNumeroDesc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NOM_PRENOM_ASC,
+		Map<ServiceClientele.Tri, String> queryNamesClientsSouscrits = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherClientsSouscritsParNumeroAsc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherClientsSouscritsParNumeroDesc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsSouscritsParNomPrenomAsc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NOM_PRENOM_DESC,
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsSouscritsParNomPrenomDesc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsSouscritsParRegionAsc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsSouscritsParRegionDesc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherClientsSouscritsParRegionAsc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherClientsSouscritsParRegionDesc");
 
-		Map<ClientService.Tri, String> queryNamesClientsProspectes = new HashMap<ClientService.Tri, String>();
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_ASC,
+		Map<ServiceClientele.Tri, String> queryNamesClientsProspectes = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsProspectesParNomPrenomAsc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_DESC,
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsProspectesParNomPrenomDesc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
 
-		Map<ClientService.Tri, String> queryNamesClientsNonProspectes = new HashMap<ClientService.Tri, String>();
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NUMERO_ASC,
+		Map<ServiceClientele.Tri, String> queryNamesClientsNonProspectes = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC,
 				"RechercherClientsNonProspectesParNumeroAsc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NUMERO_DESC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC,
 				"RechercherClientsNonProspectesParNumeroDesc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_ASC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsNonProspectesParNomPrenomAsc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_DESC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsNonProspectesParNomPrenomDesc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_REGION_ASC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_REGION_ASC,
 				"RechercherClientsNonProspectesParRegionAsc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_REGION_DESC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC,
 				"RechercherClientsNonProspectesParRegionDesc");
 
-		queryNames.put(ClientService.Filtre.TOUS_CLIENTS, queryNamesTousClients);
-		queryNames.put(ClientService.Filtre.CLIENTS_SOUSCRITS, queryNamesClientsSouscrits);
-		queryNames.put(ClientService.Filtre.CLIENTS_PROSPECTES, queryNamesClientsProspectes);
-		queryNames.put(ClientService.Filtre.CLIENTS_NON_PROSPECTES, queryNamesClientsNonProspectes);
+		queryNames.put(ServiceClientele.Filtre.TOUS_CLIENTS, queryNamesTousClients);
+		queryNames.put(ServiceClientele.Filtre.CLIENTS_SOUSCRITS, queryNamesClientsSouscrits);
+		queryNames.put(ServiceClientele.Filtre.CLIENTS_PROSPECTES, queryNamesClientsProspectes);
+		queryNames.put(ServiceClientele.Filtre.CLIENTS_NON_PROSPECTES, queryNamesClientsNonProspectes);
 	}
 
 	@Override

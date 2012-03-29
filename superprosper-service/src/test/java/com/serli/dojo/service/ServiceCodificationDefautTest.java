@@ -19,19 +19,19 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Texte;
-import com.serli.dojo.superprosper.service.database.TexteDatabaseService;
+import com.serli.dojo.superprosper.service.database.ServiceCodificationDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TexteDatabaseServiceTest {
+public class ServiceCodificationDefautTest {
 
 	@Mock
 	private EntityManager entityManager;
 
-	private TexteDatabaseService texteService;
+	private ServiceCodificationDefaut texteService;
 
 	@Before
 	public void setUp() {
-		texteService = new TexteDatabaseService();
+		texteService = new ServiceCodificationDefaut();
 		texteService.setEntityManager(entityManager);
 	}
 

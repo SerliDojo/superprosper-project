@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
  * 
  * @author Laurent RUAUD
  */
-public class GenericDatabaseService {
+public class ServiceGenerique {
 
 	@PersistenceContext
 	private EntityManager entityManager;

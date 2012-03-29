@@ -13,19 +13,19 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Agent;
-import com.serli.dojo.superprosper.service.database.AgentDatabaseService;
+import com.serli.dojo.superprosper.service.database.ServiceOrganisationDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AgentDatabaseServiceTest {
+public class ServiceoOganisationDefautTest {
 
 	@Mock
 	private EntityManager entityManager;
 
-	private AgentDatabaseService agentService;
+	private ServiceOrganisationDefaut agentService;
 
 	@Before
 	public void setUp() {
-		agentService = new AgentDatabaseService();
+		agentService = new ServiceOrganisationDefaut();
 		agentService.setEntityManager(entityManager);
 	}
 

@@ -12,7 +12,7 @@ import com.serli.dojo.superprosper.domain.Prospection;
  * 
  * @author Laurent RUAUD
  */
-public interface ClientService {
+public interface ServiceClientele {
 
 	/** Enumération des tris possibles lors d'une rechercher de clients. */
 	public enum Tri {
@@ -53,7 +53,7 @@ public interface ClientService {
 	 * 
 	 * @param recherche chaîne contenant les mots à rechercher
 	 * @return une liste de clients
-	 * @see ClientService#rechercherClients(Filtre, String)
+	 * @see ServiceClientele#rechercherClients(Filtre, String)
 	 */
 	List<Client> rechercherClients(String recherche);
 
@@ -88,7 +88,7 @@ public interface ClientService {
 	 * @param nombre nombre maximum d'éléments à rechercher
 	 * @param tri tri à utiliser
 	 * @return une liste de clients
-	 * @see ClientService#rechercherClients(Filtre, String, int, int, Tri)
+	 * @see ServiceClientele#rechercherClients(Filtre, String, int, int, Tri)
 	 */
 	List<Client> rechercherClients(Filtre filtre, String recherche, int decalage, int nombre, Tri tri);
 

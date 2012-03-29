@@ -7,7 +7,7 @@ import com.serli.dojo.superprosper.domain.Agent;
  * 
  * @author Laurent RUAUD
  */
-public interface AgentService {
+public interface ServiceOrganisation {
 
 	/**
 	 * Renvoie les informations sur l'agent correspondant au matricule.

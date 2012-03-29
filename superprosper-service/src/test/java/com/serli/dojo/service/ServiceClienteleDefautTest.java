@@ -24,20 +24,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.domain.Contrat;
 import com.serli.dojo.superprosper.domain.Prospection;
-import com.serli.dojo.superprosper.service.ClientService;
-import com.serli.dojo.superprosper.service.database.ClientDatabaseService;
+import com.serli.dojo.superprosper.service.ServiceClientele;
+import com.serli.dojo.superprosper.service.database.ServiceClienteleDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ClientDatabaseServiceTest {
+public class ServiceClienteleDefautTest {
 
 	@Mock
 	private EntityManager entityManager;
 
-	private ClientDatabaseService clientService;
+	private ServiceClienteleDefaut clientService;
 
 	@Before
 	public void setUp() {
-		clientService = new ClientDatabaseService();
+		clientService = new ServiceClienteleDefaut();
 		clientService.setEntityManager(entityManager);
 	}
 
@@ -57,7 +57,7 @@ public class ClientDatabaseServiceTest {
 		List<Client> clientsFictifs = creerClients(10);
 		TypedQuery<Client> query = mockNamedQuery("RechercherClientsSouscrits", clientsFictifs);
 
-		List<Client> clientsLus = clientService.rechercherClients(ClientService.Filtre.CLIENTS_SOUSCRITS, "MOTCLE");
+		List<Client> clientsLus = clientService.rechercherClients(ServiceClientele.Filtre.CLIENTS_SOUSCRITS, "MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
 		assertListEquals(clientsFictifs, clientsLus);
@@ -68,7 +68,7 @@ public class ClientDatabaseServiceTest {
 		List<Client> clientsFictifs = creerClients(10);
 		TypedQuery<Client> query = mockNamedQuery("RechercherClientsProspectes", clientsFictifs);
 
-		List<Client> clientsLus = clientService.rechercherClients(ClientService.Filtre.CLIENTS_PROSPECTES, "MOTCLE");
+		List<Client> clientsLus = clientService.rechercherClients(ServiceClientele.Filtre.CLIENTS_PROSPECTES, "MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
 		assertListEquals(clientsFictifs, clientsLus);
@@ -80,7 +80,7 @@ public class ClientDatabaseServiceTest {
 		TypedQuery<Client> query = mockNamedQuery("RechercherClientsNonProspectes", clientsFictifs);
 
 		List<Client> clientsLus = clientService
-				.rechercherClients(ClientService.Filtre.CLIENTS_NON_PROSPECTES, "MOTCLE");
+				.rechercherClients(ServiceClientele.Filtre.CLIENTS_NON_PROSPECTES, "MOTCLE");
 
 		verify(query).setParameter("recherche", "MOTCLE");
 		assertListEquals(clientsFictifs, clientsLus);
@@ -101,56 +101,56 @@ public class ClientDatabaseServiceTest {
 
 	@Test
 	public void testRechercherClientsAvecRechercheEtFiltreEtPagination() {
-		Map<ClientService.Tri, String> queryNamesTousClients = new HashMap<ClientService.Tri, String>();
-		queryNamesTousClients.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherParNumeroAsc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherParNumeroDesc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_NOM_PRENOM_ASC, "RechercherParNomPrenomAsc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_NOM_PRENOM_DESC, "RechercherParNomPrenomDesc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_REGION_ASC, "RechercherParRegionAsc");
-		queryNamesTousClients.put(ClientService.Tri.PAR_REGION_DESC, "RechercherParRegionDesc");
+		Map<ServiceClientele.Tri, String> queryNamesTousClients = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherParNumeroAsc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherParNumeroDesc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC, "RechercherParNomPrenomAsc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC, "RechercherParNomPrenomDesc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherParRegionAsc");
+		queryNamesTousClients.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherParRegionDesc");
 
-		Map<ClientService.Tri, String> queryNamesClientsSouscrits = new HashMap<ClientService.Tri, String>();
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsSouscritsParNumeroAsc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsSouscritsParNumeroDesc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NOM_PRENOM_ASC,
+		Map<ServiceClientele.Tri, String> queryNamesClientsSouscrits = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherClientsSouscritsParNumeroAsc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherClientsSouscritsParNumeroDesc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsSouscritsParNomPrenomAsc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_NOM_PRENOM_DESC,
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsSouscritsParNomPrenomDesc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsSouscritsParRegionAsc");
-		queryNamesClientsSouscrits.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsSouscritsParRegionDesc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherClientsSouscritsParRegionAsc");
+		queryNamesClientsSouscrits.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherClientsSouscritsParRegionDesc");
 
-		Map<ClientService.Tri, String> queryNamesClientsProspectes = new HashMap<ClientService.Tri, String>();
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_ASC,
+		Map<ServiceClientele.Tri, String> queryNamesClientsProspectes = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC, "RechercherClientsProspectesParNumeroAsc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC, "RechercherClientsProspectesParNumeroDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsProspectesParNomPrenomAsc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_DESC,
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsProspectesParNomPrenomDesc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
-		queryNamesClientsProspectes.put(ClientService.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_ASC, "RechercherClientsProspectesParRegionAsc");
+		queryNamesClientsProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC, "RechercherClientsProspectesParRegionDesc");
 
-		Map<ClientService.Tri, String> queryNamesClientsNonProspectes = new HashMap<ClientService.Tri, String>();
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NUMERO_ASC,
+		Map<ServiceClientele.Tri, String> queryNamesClientsNonProspectes = new HashMap<ServiceClientele.Tri, String>();
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NUMERO_ASC,
 				"RechercherClientsNonProspectesParNumeroAsc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NUMERO_DESC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NUMERO_DESC,
 				"RechercherClientsNonProspectesParNumeroDesc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_ASC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_ASC,
 				"RechercherClientsNonProspectesParNomPrenomAsc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_NOM_PRENOM_DESC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_NOM_PRENOM_DESC,
 				"RechercherClientsNonProspectesParNomPrenomDesc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_REGION_ASC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_REGION_ASC,
 				"RechercherClientsNonProspectesParRegionAsc");
-		queryNamesClientsNonProspectes.put(ClientService.Tri.PAR_REGION_DESC,
+		queryNamesClientsNonProspectes.put(ServiceClientele.Tri.PAR_REGION_DESC,
 				"RechercherClientsNonProspectesParRegionDesc");
 
-		Map<ClientService.Filtre, Map<ClientService.Tri, String>> queryNames = new HashMap<ClientService.Filtre, Map<ClientService.Tri, String>>();
-		queryNames.put(ClientService.Filtre.TOUS_CLIENTS, queryNamesTousClients);
-		queryNames.put(ClientService.Filtre.CLIENTS_SOUSCRITS, queryNamesClientsSouscrits);
-		queryNames.put(ClientService.Filtre.CLIENTS_PROSPECTES, queryNamesClientsProspectes);
-		queryNames.put(ClientService.Filtre.CLIENTS_NON_PROSPECTES, queryNamesClientsNonProspectes);
+		Map<ServiceClientele.Filtre, Map<ServiceClientele.Tri, String>> queryNames = new HashMap<ServiceClientele.Filtre, Map<ServiceClientele.Tri, String>>();
+		queryNames.put(ServiceClientele.Filtre.TOUS_CLIENTS, queryNamesTousClients);
+		queryNames.put(ServiceClientele.Filtre.CLIENTS_SOUSCRITS, queryNamesClientsSouscrits);
+		queryNames.put(ServiceClientele.Filtre.CLIENTS_PROSPECTES, queryNamesClientsProspectes);
+		queryNames.put(ServiceClientele.Filtre.CLIENTS_NON_PROSPECTES, queryNamesClientsNonProspectes);
 
-		for (ClientService.Filtre filtre : ClientService.Filtre.values()) {
-			for (ClientService.Tri tri : ClientService.Tri.values()) {
+		for (ServiceClientele.Filtre filtre : ServiceClientele.Filtre.values()) {
+			for (ServiceClientele.Tri tri : ServiceClientele.Tri.values()) {
 				List<Client> clientsFictifs = creerClients(20);
 				reset(entityManager);
 				TypedQuery<Client> query = mockNamedQuery(queryNames.get(filtre).get(tri), clientsFictifs);

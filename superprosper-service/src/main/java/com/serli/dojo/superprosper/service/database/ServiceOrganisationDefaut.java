@@ -1,18 +1,17 @@
 package com.serli.dojo.superprosper.service.database;
 
 import com.serli.dojo.superprosper.domain.Agent;
-import com.serli.dojo.superprosper.service.AgentService;
+import com.serli.dojo.superprosper.service.ServiceOrganisation;
 
 /**
- * Implémentation du service de lecture des agents prenant comme source une base
- * de données.
+ * Implémentation du service d'identification des utilisateurs.
  * 
  * Cette classe utilise l'injection de gestionnaire d'entité telle que proposée
  * par JPA.
  * 
  * @author Laurent RUAUD
  */
-public class AgentDatabaseService extends GenericDatabaseService implements AgentService {
+public class ServiceOrganisationDefaut extends ServiceGenerique implements ServiceOrganisation {
 
 	@Override
 	public Agent lireAgent(String matricule) {

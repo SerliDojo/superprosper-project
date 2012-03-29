@@ -9,18 +9,17 @@ import java.util.Map;
 import javax.persistence.TypedQuery;
 
 import com.serli.dojo.superprosper.domain.Texte;
-import com.serli.dojo.superprosper.service.TexteService;
+import com.serli.dojo.superprosper.service.ServiceCodification;
 
 /**
- * Implémentation du service de lecture des textes codifiés prenant comme source
- * une base de données.
+ * Implémentation du service de lecture des textes codifiés.
  * 
  * Cette classe utilise l'injection de gestionnaire d'entité telle que proposée
  * par JPA.
  * 
  * @author Laurent RUAUD
  */
-public class TexteDatabaseService extends GenericDatabaseService implements TexteService {
+public class ServiceCodificationDefaut extends ServiceGenerique implements ServiceCodification {
 
 	@Override
 	public String lireTexte(String categorie, String code) {

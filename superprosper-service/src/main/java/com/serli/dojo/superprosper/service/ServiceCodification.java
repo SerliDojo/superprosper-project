@@ -7,7 +7,7 @@ import java.util.Map;
  * 
  * @author Laurent RUAUD
  */
-public interface TexteService {
+public interface ServiceCodification {
 
 	/**
 	 * Renvoie le texte correspondant à la combinaison catégorie / code.
