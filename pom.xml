@@ -8,10 +8,11 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>superprosper-mockup-webapp</module>
 		<module>superprosper-database</module>
 		<module>superprosper-persistence</module>
 		<module>superprosper-service</module>
+		<module>superprosper-mockup-database</module>
+		<module>superprosper-mockup-webapp</module>
 	</modules>
 
 	<properties>
