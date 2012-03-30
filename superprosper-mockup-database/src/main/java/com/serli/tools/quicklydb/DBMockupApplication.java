@@ -1,6 +1,7 @@
 package com.serli.tools.quicklydb;
 
 import java.awt.Dimension;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,6 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 import org.myjavadev.utility.LoggingFormatter;
 import org.myjavadev.utility.TextAreaLogHandler;
-import org.myjavadev.utility.TextAreaOutputStream;
 
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
 import com.serli.tools.quicklydb.task.RunScriptAction;
@@ -50,18 +50,17 @@ public class DBMockupApplication extends SingleFrameApplication {
 
 		// Initialisation des chemins des scripts par défaut
 		String FILE_SEPARATOR = System.getProperty("file.separator");
-		String path = getClass().getProtectionDomain().getCodeSource()
-				.getLocation().getFile();
+		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
 		if (path.endsWith(".jar")) {
 			path = path.substring(0, path.lastIndexOf(FILE_SEPARATOR) + 1);
 		}
 
-//		mainView.getScriptLauncherPanel().setPathCreateTables(
-//				path + "create-tables.sql");
-//		mainView.getScriptLauncherPanel().setPathPopulateTables(
-//				path + "populate-tables.sql");
-//		mainView.getScriptLauncherPanel().setPathDeleteTables(
-//				path + "delete-tables.sql");
+		// mainView.getScriptLauncherPanel().setPathCreateTables(
+		// path + "create-tables.sql");
+		// mainView.getScriptLauncherPanel().setPathPopulateTables(
+		// path + "populate-tables.sql");
+		// mainView.getScriptLauncherPanel().setPathDeleteTables(
+		// path + "delete-tables.sql");
 
 		show(mainView);
 	}
@@ -139,9 +138,8 @@ public class DBMockupApplication extends SingleFrameApplication {
 		sb.append("\r\n\tcreate = ").append(create);
 		getLogger().log(Level.INFO, sb.toString());
 
-		TextAreaOutputStream taos = new  TextAreaOutputStream(mainView.getLoggingPanel().getTextArea());
-		StartDBServerAction srv = new StartDBServerAction(this, dbName, port,
-				create, taos);
+		OutputStream outputStream = mainView.getLoggingPanel().getOutputStream();
+		StartDBServerAction srv = new StartDBServerAction(this, dbName, port, create, outputStream);
 		srv.execute();
 	}
 
@@ -152,7 +150,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 
 	@Action
 	public void clearLogs() {
-		mainView.getLoggingPanel().getTextArea().setText("");
+		mainView.getLoggingPanel().clear();
 	}
 
 	@Action
@@ -163,8 +161,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 			rss = new RunSqlStatement(this, this.dbu.getConnection(), sqlRequest, mainView.getRequestPanel());
 			rss.execute();
 		} catch (Exception e) {
-			getLogger().log(Level.SEVERE,
-					"Erreur lors de la récupération de la connection sql.", e);
+			getLogger().log(Level.SEVERE, "Erreur lors de la récupération de la connection sql.", e);
 		}
 	}
 
@@ -173,7 +170,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 		getLogger().log(Level.INFO, "Demande de suppression des tables.");
 		RunScriptAction rsad = new RunScriptAction(this, this.dbu, "");
 		rsad.execute();
-		
+
 		getLogger().log(Level.INFO, "Demande de création des tables.");
 		RunScriptAction rsac = new RunScriptAction(this, this.dbu, "");
 		rsac.execute();
@@ -186,8 +183,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 	/**
 	 * Définit l'instance DerbyUtil qui a démarré le serveur de base de donnée.
 	 * 
-	 * @param dbu
-	 *            l'instance <code>DerbyUtil</code>
+	 * @param dbu l'instance <code>DerbyUtil</code>
 	 */
 	public void setDerbyUtil(DerbyUtil dbu) {
 
@@ -200,8 +196,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 					mainView.getBtnStopDB().setEnabled(true);
 				}
 			} catch (Exception ex) {
-				getLogger().log(Level.SEVERE,
-						"La connexion sur la base est invalide.", ex);
+				getLogger().log(Level.SEVERE, "La connexion sur la base est invalide.", ex);
 				StopDBServerAction srv = new StopDBServerAction(this, dbu);
 				srv.execute();
 			}
@@ -222,10 +217,8 @@ public class DBMockupApplication extends SingleFrameApplication {
 			try {
 				conn = dbu.getConnection();
 			} catch (Exception e) {
-				getLogger()
-						.log(Level.SEVERE,
-								"Erreur lors de la récupération de la connexion sur la base de donnée.",
-								e);
+				getLogger().log(Level.SEVERE, "Erreur lors de la récupération de la connexion sur la base de donnée.",
+						e);
 			}
 		}
 		return conn;
