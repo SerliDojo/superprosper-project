@@ -1,12 +1,10 @@
 package com.serli.tools.quicklydb;
 
 import java.awt.Dimension;
-import java.io.File;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
@@ -18,14 +16,11 @@ import org.myjavadev.utility.TextAreaLogHandler;
 import org.myjavadev.utility.TextAreaOutputStream;
 
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
-import com.serli.tools.quicklydb.filter.SqlFileFilter;
 import com.serli.tools.quicklydb.task.RunScriptAction;
 import com.serli.tools.quicklydb.task.RunSqlStatement;
 import com.serli.tools.quicklydb.task.StartDBServerAction;
 import com.serli.tools.quicklydb.task.StopDBServerAction;
-import com.serli.tools.quicklydb.view.ConfigurationPanel;
 import com.serli.tools.quicklydb.view.DBMockupView;
-import com.serli.tools.quicklydb.view.SqlFileView;
 
 /**
  * The main class of the application.
