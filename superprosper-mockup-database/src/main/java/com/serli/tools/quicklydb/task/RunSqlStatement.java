@@ -13,7 +13,7 @@ import javax.swing.JTable;
 
 import org.jdesktop.application.Task;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
 import com.serli.tools.quicklydb.view.RequestPanel;
 
@@ -31,7 +31,7 @@ public class RunSqlStatement extends Task<JTable, Void> {
 	 * @param sqlRequest la requête de type select
 	 * @param requestPane le panneau ou afficher le resultat <code>JTable</code>
 	 */
-	public RunSqlStatement(AppQuiklydb app, Connection conn, String sqlRequest, RequestPanel requestPane) {
+	public RunSqlStatement(DBMockupApplication app, Connection conn, String sqlRequest, RequestPanel requestPane) {
 		super(app);
 		this.logger = app.getLogger();
 		this.conn = conn;

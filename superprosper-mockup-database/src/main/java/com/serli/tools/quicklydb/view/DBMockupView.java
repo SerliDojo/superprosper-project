@@ -11,7 +11,7 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 
-public class QuiklydbMainView extends FrameView {
+public class DBMockupView extends FrameView {
     
 	private JButton btnStartDB;
 	private JButton btnStopDB;
@@ -25,7 +25,7 @@ public class QuiklydbMainView extends FrameView {
 	/**
 	 * Create the frame.
 	 */
-	public QuiklydbMainView(SingleFrameApplication app) {
+	public DBMockupView(SingleFrameApplication app) {
 		 super(app);
 			
 		initComponents();
@@ -37,7 +37,7 @@ public class QuiklydbMainView extends FrameView {
 	
 	private void initActions() {
 		
-		ActionMap actionMap = Application.getInstance().getContext().getActionMap();
+		ActionMap actionMap = getApplication().getContext().getActionMap();
 		
 		btnStartDB.setAction(actionMap.get("startDBServer"));
 		btnStopDB.setAction(actionMap.get("stopDBServer"));
@@ -45,35 +45,25 @@ public class QuiklydbMainView extends FrameView {
 	}
 	
 	private void initComponents() {		
-		JToolBar toolBar = new JToolBar("DB Server");
 		btnStartDB = new JButton();
 		btnStopDB = new JButton();
 		btnExitApplication = new JButton();
 //		btnStopDB.setEnabled( !btnStartDB.isEnabled() );
+
+		JToolBar toolBar = new JToolBar("DB Server");
 		toolBar.add(btnStartDB);
 		toolBar.add(btnStopDB);
 		toolBar.add(btnExitApplication);
 		setToolBar(toolBar);
 		
-		ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(QuiklydbMainView.class);
-		tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-		configurationPanel = new ConfigurationPanel();
-		scriptLauncherPanel = new ScriptLauncherPanel();
 		requestPanel = new RequestPanel();
 		loggingPanel = new LoggingPanel();
-		tabbedPane.addTab("", resourceMap.getIcon("ConfigurationPanel.icon"),
-				configurationPanel, resourceMap.getString("TabbedPanel.configuration.tooltip", ""));
-		tabbedPane.addTab("", resourceMap.getIcon("ScriptLauncherPanel.icon"),
-				scriptLauncherPanel, resourceMap.getString("TabbedPanel.usfuls.tooltip", ""));
-		tabbedPane.addTab("", resourceMap.getIcon("RequestPanel.icon"),
-				requestPanel, resourceMap.getString("TabbedPanel.request.tooltip", ""));
-//		tabbedPane.addTab("", resourceMap.getIcon("LoggingPanel.icon"),
-//				loggingPanel, resourceMap.getString("TabbedPanel.logging.tooltip", ""));
 
 		JSplitPane splitPane = new JSplitPane ();
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		splitPane.setTopComponent(tabbedPane);
+		splitPane.setTopComponent(requestPanel);
 		splitPane.setBottomComponent(loggingPanel);
+		splitPane.setDividerLocation(400);
 		setComponent(splitPane);
 	}
 

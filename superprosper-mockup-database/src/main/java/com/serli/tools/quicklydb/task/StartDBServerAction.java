@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import org.jdesktop.application.Task;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
 
 public class StartDBServerAction extends Task<Connection, Void> {
@@ -20,7 +20,7 @@ public class StartDBServerAction extends Task<Connection, Void> {
 	private DerbyUtil dbu = null;
 	private OutputStream out = null;
 
-	public StartDBServerAction(AppQuiklydb app, String dbName, int port,
+	public StartDBServerAction(DBMockupApplication app, String dbName, int port,
 			boolean create, OutputStream out) {
 		super(app);
 		logger = app.getLogger();
@@ -40,7 +40,7 @@ public class StartDBServerAction extends Task<Connection, Void> {
 	protected void succeeded(Connection cnx) {
 		try {
 			if ( cnx != null && cnx.isValid( 1000 ) ) {
-				((AppQuiklydb) getApplication()).setDerbyUtil(dbu);
+				((DBMockupApplication) getApplication()).setDerbyUtil(dbu);
 				logger.log(Level.INFO, "SUCCESS");
 			}
 		} catch (SQLException e) {

@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import org.jdesktop.application.Task;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
 
 public class StopDBServerAction extends Task<Void, Void> {
@@ -13,7 +13,7 @@ public class StopDBServerAction extends Task<Void, Void> {
 	private Logger logger = null;
 	private DerbyUtil dbu = null;
 	
-	public StopDBServerAction(AppQuiklydb app, DerbyUtil dbu) {
+	public StopDBServerAction(DBMockupApplication app, DerbyUtil dbu) {
 		super(app);
 		logger = app.getLogger();
 		this.dbu = dbu;
@@ -28,7 +28,7 @@ public class StopDBServerAction extends Task<Void, Void> {
 	@Override
 	protected void succeeded(Void v) {
 		dbu = null;
-		((AppQuiklydb)getApplication()).setDerbyUtil(dbu);
+		((DBMockupApplication)getApplication()).setDerbyUtil(dbu);
 		logger.log(Level.INFO, "SUCCESS");
 	}
 	

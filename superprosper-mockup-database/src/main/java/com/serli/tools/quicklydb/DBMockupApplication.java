@@ -1,19 +1,11 @@
 package com.serli.tools.quicklydb;
 
 import java.awt.Dimension;
-import java.awt.TextArea;
 import java.io.File;
-import java.io.PrintStream;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.sql.RowSetMetaData;
-import javax.sql.rowset.CachedRowSet;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -32,16 +24,16 @@ import com.serli.tools.quicklydb.task.RunSqlStatement;
 import com.serli.tools.quicklydb.task.StartDBServerAction;
 import com.serli.tools.quicklydb.task.StopDBServerAction;
 import com.serli.tools.quicklydb.view.ConfigurationPanel;
-import com.serli.tools.quicklydb.view.QuiklydbMainView;
+import com.serli.tools.quicklydb.view.DBMockupView;
 import com.serli.tools.quicklydb.view.SqlFileView;
 
 /**
  * The main class of the application.
  */
-public class AppQuiklydb extends SingleFrameApplication {
+public class DBMockupApplication extends SingleFrameApplication {
 
-	private static Logger logger = Logger.getLogger("AppQuiklydb-logger");
-	private QuiklydbMainView mainView = null;
+	private static Logger logger = Logger.getLogger("DBMockupApplication-logger");
+	private DBMockupView mainView = null;
 	private DerbyUtil dbu = null;
 
 	/**
@@ -51,16 +43,13 @@ public class AppQuiklydb extends SingleFrameApplication {
 	protected void startup() {
 
 		// Création de la fenêtre principale
-		mainView = new QuiklydbMainView(this);
+		mainView = new DBMockupView(this);
 
 		JFrame frame = mainView.getFrame();
 		Dimension frameSize = new Dimension(750, 600);
 		frame.setMinimumSize(frameSize);
 		frame.setPreferredSize(frameSize);
 		frame.setSize(frameSize);
-		// Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		// frame.setLocation((screen.width - frameSize.width)/2, (screen.height
-		// - frameSize.height)/2);
 		frame.setLocationRelativeTo(null);
 		setMainFrame(frame);
 
@@ -72,12 +61,12 @@ public class AppQuiklydb extends SingleFrameApplication {
 			path = path.substring(0, path.lastIndexOf(FILE_SEPARATOR) + 1);
 		}
 
-		mainView.getScriptLauncherPanel().setPathCreateTables(
-				path + "create-tables.sql");
-		mainView.getScriptLauncherPanel().setPathPopulateTables(
-				path + "populate-tables.sql");
-		mainView.getScriptLauncherPanel().setPathDeleteTables(
-				path + "delete-tables.sql");
+//		mainView.getScriptLauncherPanel().setPathCreateTables(
+//				path + "create-tables.sql");
+//		mainView.getScriptLauncherPanel().setPathPopulateTables(
+//				path + "populate-tables.sql");
+//		mainView.getScriptLauncherPanel().setPathDeleteTables(
+//				path + "delete-tables.sql");
 
 		show(mainView);
 	}
@@ -124,34 +113,15 @@ public class AppQuiklydb extends SingleFrameApplication {
 	 * 
 	 * @return the instance of appQuiklydb
 	 */
-	public static AppQuiklydb getApplication() {
-		return Application.getInstance(AppQuiklydb.class);
+	public static DBMockupApplication getApplication() {
+		return Application.getInstance(DBMockupApplication.class);
 	}
 
 	/**
 	 * Main method launching the application.
 	 */
 	public static void main(String[] args) {
-		// try {
-		// boolean findNimbus = false;
-		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		// if ("Nimbus".equals(info.getName())) {
-		// UIManager.setLookAndFeel(info.getClassName());
-		// findNimbus = true;
-		// break;
-		// }
-		// }
-		// if ( !findNimbus ) {
-		// MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
-		// UIManager.setLookAndFeel(new MetalLookAndFeel());
-		// }
-		// } catch (Exception e) {
-		// // Metal
-		// // Nimbus
-		// // CDE/Motif
-		// // GTK+
-		// }
-		launch(AppQuiklydb.class, args);
+		launch(DBMockupApplication.class, args);
 	}
 
 	@Action
@@ -183,7 +153,7 @@ public class AppQuiklydb extends SingleFrameApplication {
 
 	@Action
 	public void exitApplication() {
-		AppQuiklydb.getApplication().exit();
+		DBMockupApplication.getApplication().exit();
 	}
 
 	@Action

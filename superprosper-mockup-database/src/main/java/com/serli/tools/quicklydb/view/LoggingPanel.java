@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 
 import org.jdesktop.application.Application;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 
 public class LoggingPanel extends JPanel {
 
@@ -28,11 +28,11 @@ public class LoggingPanel extends JPanel {
 		initComponents();
 		initActions();
 		// initialisation du logger
-		AppQuiklydb.getApplication().initLogger(txtLog);
+		DBMockupApplication.getApplication().initLogger(txtLog);
 	}
 	
 	private void initActions() {
-		ActionMap actionMap = Application.getInstance().getContext().getActionMap(AppQuiklydb.getApplication());
+		ActionMap actionMap = Application.getInstance().getContext().getActionMap(DBMockupApplication.getApplication());
 		btnClearLog.setAction(actionMap.get("clearLog"));
 	}
 

@@ -10,13 +10,13 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.ResourceMap;
 import org.myjavadev.utility.FileTools;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 
 public class SqlFileView extends FileView {
 	ImageIcon sqlIcon = null;
 
 	public SqlFileView() {
-		ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(AppQuiklydb.class);
+		ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(DBMockupApplication.class);
 		sqlIcon = resourceMap.getImageIcon("sqlFileView.ico");
 	}
 

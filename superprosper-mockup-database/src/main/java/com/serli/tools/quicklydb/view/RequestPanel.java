@@ -18,7 +18,7 @@ import javax.swing.border.TitledBorder;
 
 import org.jdesktop.application.Application;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 
 /**
  *
@@ -39,7 +39,7 @@ public class RequestPanel extends JSplitPane {
     }
     
 	private void initActions() {
-		ActionMap actionMap = Application.getInstance().getContext().getActionMap(AppQuiklydb.getApplication());
+		ActionMap actionMap = Application.getInstance().getContext().getActionMap(DBMockupApplication.getApplication());
 		
 		btnExecute.setAction(actionMap.get("executeRequest"));
 		btnClear.setAction(actionMap.get("clearRequest"));
@@ -65,7 +65,7 @@ public class RequestPanel extends JSplitPane {
     private void initComponents() {
     	setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-		//ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(AppQuiklydb.class);
+		//ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(DBMockupApplication.class);
 		
     	// Editeur SQL
     	JPanel editorPane = new JPanel();	

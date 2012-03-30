@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import org.jdesktop.application.Task;
 
-import com.serli.tools.quicklydb.AppQuiklydb;
+import com.serli.tools.quicklydb.DBMockupApplication;
 import com.serli.tools.quicklydb.database.derby.DerbyUtil;
 
 public class RunScriptAction extends Task<Void, Void> {
@@ -15,7 +15,7 @@ public class RunScriptAction extends Task<Void, Void> {
 	private DerbyUtil dbu = null;
 	private String scriptPath = null;
 	
-	public RunScriptAction(AppQuiklydb app, DerbyUtil dbu, String scriptPath) {
+	public RunScriptAction(DBMockupApplication app, DerbyUtil dbu, String scriptPath) {
 		super(app);
 		this.logger = app.getLogger();
 		this.dbu = dbu;
