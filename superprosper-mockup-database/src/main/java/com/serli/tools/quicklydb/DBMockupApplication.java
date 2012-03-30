@@ -125,7 +125,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 	}
 
 	@Action
-	public void stopDBServer() {
+	public void stopDatabase() {
 		StringBuilder sb = new StringBuilder("STOPING Derby server...");
 		getLogger().log(Level.INFO, sb.toString());
 		StopDBServerAction srv = new StopDBServerAction(this, dbu);
@@ -133,11 +133,10 @@ public class DBMockupApplication extends SingleFrameApplication {
 	}
 
 	@Action
-	public void startDBServer() {
-		ConfigurationPanel cfg = mainView.getConfigurationPanel();
-		String dbName = cfg.getDBName();
-		int port = cfg.getDBPort();
-		boolean create = cfg.getDBCreate();
+	public void startDatabase() {
+		String dbName = "DBMockup";
+		int port = 1527;
+		boolean create = true;
 
 		StringBuilder sb = new StringBuilder("STARTING Derby server...");
 		sb.append("\r\n\tDBName = ").append(dbName);
@@ -157,7 +156,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 	}
 
 	@Action
-	public void clearLog() {
+	public void clearLogs() {
 		mainView.getLoggingPanel().getTextArea().setText("");
 	}
 
@@ -175,78 +174,18 @@ public class DBMockupApplication extends SingleFrameApplication {
 	}
 
 	@Action
-	public void clearRequest() {
-		mainView.getRequestPanel().clearRequest();
-	}
-
-	@Action
-	public void createTables() {
-		getLogger().log(Level.INFO, "Demande de création des tables.");
-		String scriptPath = mainView.getScriptLauncherPanel()
-				.getPathCreateTables();
-		RunScriptAction rsa = new RunScriptAction(this, this.dbu, scriptPath);
-		rsa.execute();
-	}
-
-	@Action
-	public void populateTables() {
-		getLogger().log(Level.INFO, "Demande de valorisation des tables.");
-		String scriptPath = mainView.getScriptLauncherPanel()
-				.getPathPopulateTables();
-		RunScriptAction rsa = new RunScriptAction(this, this.dbu, scriptPath);
-		rsa.execute();
-	}
-
-	@Action
-	public void deleteTables() {
+	public void resetDataset() {
 		getLogger().log(Level.INFO, "Demande de suppression des tables.");
-		String scriptPath = mainView.getScriptLauncherPanel()
-				.getPathDeleteTables();
-		RunScriptAction rsa = new RunScriptAction(this, this.dbu, scriptPath);
-		rsa.execute();
-	}
+		RunScriptAction rsad = new RunScriptAction(this, this.dbu, "");
+		rsad.execute();
+		
+		getLogger().log(Level.INFO, "Demande de création des tables.");
+		RunScriptAction rsac = new RunScriptAction(this, this.dbu, "");
+		rsac.execute();
 
-	@Action
-	public void chooseScriptCreateTables() {
-		String path = mainView.getScriptLauncherPanel().getPathCreateTables();
-		path = selectSrciptFile(path);
-		mainView.getScriptLauncherPanel().setPathCreateTables(path);
-	}
-
-	@Action
-	public void chooseScriptPopulateTables() {
-		String path = mainView.getScriptLauncherPanel().getPathPopulateTables();
-		path = selectSrciptFile(path);
-		mainView.getScriptLauncherPanel().setPathPopulateTables(path);
-	}
-
-	@Action
-	public void chooseScriptDeleteTables() {
-		String path = mainView.getScriptLauncherPanel().getPathDeleteTables();
-		path = selectSrciptFile(path);
-		mainView.getScriptLauncherPanel().setPathDeleteTables(path);
-	}
-
-	/**
-	 * Permet de sélectionner un fichier de type <i>.sql</i> et de retourner son
-	 * chemin.
-	 * 
-	 * @param path
-	 *            le chemin de départ de la selection
-	 * @return le path du fichier sql selectionné.
-	 */
-	private String selectSrciptFile(String path) {
-		File file = new File(path);
-		JFileChooser fc = new JFileChooser(file);
-
-		fc.setFileFilter(new SqlFileFilter());
-		fc.setFileView(new SqlFileView());
-
-		int returnVal = fc.showOpenDialog(getMainFrame());
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = fc.getSelectedFile();
-		}
-		return file.getPath();
+		getLogger().log(Level.INFO, "Demande de valorisation des tables.");
+		RunScriptAction rsav = new RunScriptAction(this, this.dbu, "");
+		rsav.execute();
 	}
 
 	/**

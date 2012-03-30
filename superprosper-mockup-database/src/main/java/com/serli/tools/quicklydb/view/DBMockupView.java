@@ -3,22 +3,20 @@ package com.serli.tools.quicklydb.view;
 import javax.swing.ActionMap;
 import javax.swing.JButton;
 import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 
-import org.jdesktop.application.Application;
 import org.jdesktop.application.FrameView;
-import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 
 public class DBMockupView extends FrameView {
-    
-	private JButton btnStartDB;
-	private JButton btnStopDB;
+
 	private JButton btnExitApplication;
-	private JTabbedPane tabbedPane;
-	private ConfigurationPanel configurationPanel;
-	private ScriptLauncherPanel scriptLauncherPanel;
+	private JButton btnStartDatabase;
+	private JButton btnResetDataset;
+	private JButton btnStopDatabase;
+	private JButton btnExecuteRequest;
+	private JButton btnClearLogs;
+
 	private RequestPanel requestPanel;
 	private LoggingPanel loggingPanel;
 
@@ -26,61 +24,51 @@ public class DBMockupView extends FrameView {
 	 * Create the frame.
 	 */
 	public DBMockupView(SingleFrameApplication app) {
-		 super(app);
-			
-		initComponents();
-		initActions();
-		
-		// "enable est affecté à true" par initActions !!!
-		btnStopDB.setEnabled( !btnStartDB.isEnabled() );
-	}
-	
-	private void initActions() {
-		
-		ActionMap actionMap = getApplication().getContext().getActionMap();
-		
-		btnStartDB.setAction(actionMap.get("startDBServer"));
-		btnStopDB.setAction(actionMap.get("stopDBServer"));
-		btnExitApplication.setAction(actionMap.get("exitApplication"));
-	}
-	
-	private void initComponents() {		
-		btnStartDB = new JButton();
-		btnStopDB = new JButton();
-		btnExitApplication = new JButton();
-//		btnStopDB.setEnabled( !btnStartDB.isEnabled() );
+		super(app);
 
-		JToolBar toolBar = new JToolBar("DB Server");
-		toolBar.add(btnStartDB);
-		toolBar.add(btnStopDB);
+		ActionMap actionMap = getApplication().getContext().getActionMap();
+
+		btnExitApplication = new JButton(actionMap.get("exitApplication"));
+		btnStartDatabase = new JButton(actionMap.get("startDatabase"));
+		btnResetDataset = new JButton(actionMap.get("resetDataset"));
+		btnStopDatabase = new JButton(actionMap.get("stopDatabase"));
+		btnExecuteRequest = new JButton(actionMap.get("executeRequest"));
+		btnClearLogs = new JButton(actionMap.get("clearLogs"));
+
+		JToolBar toolBar = new JToolBar("Commandes");
 		toolBar.add(btnExitApplication);
+		toolBar.addSeparator();
+		toolBar.add(btnStartDatabase);
+		toolBar.add(btnResetDataset);
+		toolBar.add(btnStopDatabase);
+		toolBar.addSeparator();
+		toolBar.add(btnExecuteRequest);
+		toolBar.addSeparator();
+		toolBar.add(btnClearLogs);
 		setToolBar(toolBar);
-		
+
 		requestPanel = new RequestPanel();
 		loggingPanel = new LoggingPanel();
 
-		JSplitPane splitPane = new JSplitPane ();
+		JSplitPane splitPane = new JSplitPane();
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setTopComponent(requestPanel);
 		splitPane.setBottomComponent(loggingPanel);
 		splitPane.setDividerLocation(400);
 		setComponent(splitPane);
+
+		// TODO: move this
+		btnResetDataset.setEnabled(!btnStartDatabase.isEnabled());
+		btnStopDatabase.setEnabled(!btnStartDatabase.isEnabled());
+		btnExecuteRequest.setEnabled(!btnStartDatabase.isEnabled());
 	}
 
 	public JButton getBtnStartDB() {
-		return btnStartDB;
+		return btnStartDatabase;
 	}
 
 	public JButton getBtnStopDB() {
-		return btnStopDB;
-	}
-
-	public ConfigurationPanel getConfigurationPanel() {
-		return configurationPanel;
-	}
-
-	public ScriptLauncherPanel getScriptLauncherPanel() {
-		return scriptLauncherPanel;
+		return btnStopDatabase;
 	}
 
 	public RequestPanel getRequestPanel() {
