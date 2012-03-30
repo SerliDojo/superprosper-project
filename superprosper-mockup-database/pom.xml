@@ -10,45 +10,15 @@
 
 	<artifactId>superprosper-mockup-database</artifactId>
 
-	<repositories>
-		<repository>
-			<id>java.net-m2</id>
-			<name>java.net - Maven 2</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/java.net-m2</url>
-		</repository>
-	</repositories>
-
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<finalName>quicklydb</finalName>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<mainClass>
-								com.serli.tools.quicklydb.AppQuiklydb
-							</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attached</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
@@ -62,11 +32,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.8.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
 			<artifactId>derbynet</artifactId>
 			<version>10.8.1.2</version>
 		</dependency>
@@ -75,16 +40,16 @@
 			<artifactId>appframework</artifactId>
 			<version>1.0.3</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.jdesktop</groupId> -->
-		<!-- <artifactId>beansbinding</artifactId> -->
-		<!-- <version>1.2.1</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>11.0.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
