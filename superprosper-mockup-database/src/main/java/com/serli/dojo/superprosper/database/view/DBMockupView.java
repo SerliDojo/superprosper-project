@@ -1,4 +1,4 @@
-package com.serli.tools.quicklydb.view;
+package com.serli.dojo.superprosper.database.view;
 
 import javax.swing.ActionMap;
 import javax.swing.JButton;

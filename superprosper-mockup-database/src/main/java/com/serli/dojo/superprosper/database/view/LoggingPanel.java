@@ -1,4 +1,4 @@
-package com.serli.tools.quicklydb.view;
+package com.serli.dojo.superprosper.database.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

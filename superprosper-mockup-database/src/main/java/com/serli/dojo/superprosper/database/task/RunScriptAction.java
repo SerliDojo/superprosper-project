@@ -1,4 +1,4 @@
-package com.serli.tools.quicklydb.task;
+package com.serli.dojo.superprosper.database.task;
 
 import java.sql.Connection;
 import java.util.logging.Level;
@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 
 import org.jdesktop.application.Task;
 
-import com.serli.tools.quicklydb.DBMockupApplication;
-import com.serli.tools.quicklydb.database.derby.DerbyUtil;
+import com.serli.dojo.superprosper.database.DBMockupApplication;
+import com.serli.dojo.superprosper.database.database.derby.DerbyUtil;
 
 public class RunScriptAction extends Task<Void, Void> {
 	

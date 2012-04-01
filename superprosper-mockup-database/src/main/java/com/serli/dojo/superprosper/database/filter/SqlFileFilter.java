@@ -1,4 +1,4 @@
-package com.serli.tools.quicklydb.filter;
+package com.serli.dojo.superprosper.database.filter;
 
 import java.io.File;
 

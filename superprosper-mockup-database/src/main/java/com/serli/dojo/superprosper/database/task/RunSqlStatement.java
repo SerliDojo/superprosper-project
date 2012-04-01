@@ -1,4 +1,4 @@
-package com.serli.tools.quicklydb.task;
+package com.serli.dojo.superprosper.database.task;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,9 +13,9 @@ import javax.swing.JTable;
 
 import org.jdesktop.application.Task;
 
-import com.serli.tools.quicklydb.DBMockupApplication;
-import com.serli.tools.quicklydb.database.derby.DerbyUtil;
-import com.serli.tools.quicklydb.view.RequestPanel;
+import com.serli.dojo.superprosper.database.DBMockupApplication;
+import com.serli.dojo.superprosper.database.database.derby.DerbyUtil;
+import com.serli.dojo.superprosper.database.view.RequestPanel;
 
 public class RunSqlStatement extends Task<JTable, Void> {
 	

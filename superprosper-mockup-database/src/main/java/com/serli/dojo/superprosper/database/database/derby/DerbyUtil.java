@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.serli.tools.quicklydb.database.derby;
+package com.serli.dojo.superprosper.database.database.derby;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
