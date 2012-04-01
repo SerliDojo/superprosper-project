@@ -3,6 +3,6 @@
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>superprosper-mockup</display-name>
+	<display-name>superprosper-mockup-webapp</display-name>
 
 </web-app>
