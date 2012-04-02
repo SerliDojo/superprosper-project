@@ -7,13 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 
 import org.jdesktop.application.Action;
-import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
-import org.myjavadev.utility.LoggingFormatter;
-import org.myjavadev.utility.TextAreaLogHandler;
 
 import com.serli.dojo.superprosper.database.database.derby.DerbyUtil;
 import com.serli.dojo.superprosper.database.task.RunScriptAction;
@@ -30,6 +26,13 @@ public class DBMockupApplication extends SingleFrameApplication {
 	private static Logger logger = Logger.getLogger("DBMockupApplication-logger");
 	private DBMockupView mainView = null;
 	private DerbyUtil dbu = null;
+
+	/**
+	 * Main method launching the application.
+	 */
+	public static void main(String[] args) {
+		launch(DBMockupApplication.class, args);
+	}
 
 	/**
 	 * At startup create and show the main frame of the application.
@@ -65,65 +68,14 @@ public class DBMockupApplication extends SingleFrameApplication {
 		show(mainView);
 	}
 
-	/**
-	 * Initialisation du système de log
-	 */
-	public void initLogger(JTextArea txtLog) {
-
-		try {
-			// String FILE_SEPARATOR = System.getProperty("file.separator");
-			LoggingFormatter lf = new LoggingFormatter("HH:mm:ss");
-			TextAreaLogHandler vh = new TextAreaLogHandler(txtLog);
-			vh.setFormatter(lf);
-			logger.addHandler(vh);
-			logger.setLevel(Level.ALL);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
-	}
-
 	public Logger getLogger() {
 		return logger;
 	}
 
-	@Override
-	protected void shutdown() {
-		System.out.println("shutdown");
-	}
-
-	/**
-	 * This method is to initialize the specified window by injecting resources.
-	 * Windows shown in our application come fully initialized from the GUI
-	 * builder, so this additional configuration is not needed.
-	 */
-	@Override
-	protected void configureWindow(java.awt.Window root) {
-		System.out.println(root);
-	}
-
-	/**
-	 * A convenient static getter for the application instance.
-	 * 
-	 * @return the instance of appQuiklydb
-	 */
-	public static DBMockupApplication getApplication() {
-		return Application.getInstance(DBMockupApplication.class);
-	}
-
-	/**
-	 * Main method launching the application.
-	 */
-	public static void main(String[] args) {
-		launch(DBMockupApplication.class, args);
-	}
-
 	@Action
 	public void stopDatabase() {
-		StringBuilder sb = new StringBuilder("STOPING Derby server...");
-		getLogger().log(Level.INFO, sb.toString());
-		StopDBServerAction srv = new StopDBServerAction(this, dbu);
-		srv.execute();
+		getLogger().log(Level.INFO, "STOPING Derby server...");
+		new StopDBServerAction(this, dbu).execute();
 	}
 
 	@Action
@@ -145,7 +97,7 @@ public class DBMockupApplication extends SingleFrameApplication {
 
 	@Action
 	public void exitApplication() {
-		DBMockupApplication.getApplication().exit();
+		exit();
 	}
 
 	@Action
