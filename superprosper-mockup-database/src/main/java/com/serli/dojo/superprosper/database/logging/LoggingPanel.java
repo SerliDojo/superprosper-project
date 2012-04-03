@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.database.view;
+package com.serli.dojo.superprosper.database.logging;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
