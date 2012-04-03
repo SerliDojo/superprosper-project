@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.database.logging;
+package com.serli.dojo.superprosper.database.trace;
 
 import java.io.IOException;
 
