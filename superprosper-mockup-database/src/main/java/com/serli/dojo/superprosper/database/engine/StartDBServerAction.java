@@ -1,11 +1,10 @@
-package com.serli.dojo.superprosper.database.task;
+package com.serli.dojo.superprosper.database.engine;
 
 import java.io.OutputStream;
 
 import org.jdesktop.application.Task;
 
 import com.serli.dojo.superprosper.database.DBMockupApplication;
-import com.serli.dojo.superprosper.database.engine.DerbyEngine;
 
 public class StartDBServerAction extends Task<DerbyEngine, Void> {
 

@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.database.task;
+package com.serli.dojo.superprosper.database.request;
 
 import java.sql.Connection;
 import java.util.logging.Level;

@@ -1,9 +1,8 @@
-package com.serli.dojo.superprosper.database.task;
+package com.serli.dojo.superprosper.database.engine;
 
 import org.jdesktop.application.Task;
 
 import com.serli.dojo.superprosper.database.DBMockupApplication;
-import com.serli.dojo.superprosper.database.engine.DerbyEngine;
 
 public class StopDBServerAction extends Task<Void, Void> {
 

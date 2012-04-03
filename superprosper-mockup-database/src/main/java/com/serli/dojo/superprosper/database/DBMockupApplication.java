@@ -12,10 +12,10 @@ import org.jdesktop.application.Action;
 import org.jdesktop.application.SingleFrameApplication;
 
 import com.serli.dojo.superprosper.database.engine.DerbyEngine;
-import com.serli.dojo.superprosper.database.task.RunScriptAction;
-import com.serli.dojo.superprosper.database.task.RunSqlStatement;
-import com.serli.dojo.superprosper.database.task.StartDBServerAction;
-import com.serli.dojo.superprosper.database.task.StopDBServerAction;
+import com.serli.dojo.superprosper.database.engine.StartDBServerAction;
+import com.serli.dojo.superprosper.database.engine.StopDBServerAction;
+import com.serli.dojo.superprosper.database.request.RunScriptAction;
+import com.serli.dojo.superprosper.database.request.RunSqlStatement;
 
 /**
  * The main class of the application.

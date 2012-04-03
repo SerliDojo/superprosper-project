@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.database.task;
+package com.serli.dojo.superprosper.database.request;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,7 +15,6 @@ import org.jdesktop.application.Task;
 
 import com.serli.dojo.superprosper.database.DBMockupApplication;
 import com.serli.dojo.superprosper.database.engine.DerbyEngine;
-import com.serli.dojo.superprosper.database.view.RequestPanel;
 
 public class RunSqlStatement extends Task<JTable, Void> {
 	
