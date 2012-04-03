@@ -8,6 +8,8 @@ import javax.swing.JToolBar;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.SingleFrameApplication;
 
+import com.serli.dojo.superprosper.database.logging.LoggingPanel;
+
 public class DBMockupView extends FrameView {
 
 	private JButton btnExitApplication;

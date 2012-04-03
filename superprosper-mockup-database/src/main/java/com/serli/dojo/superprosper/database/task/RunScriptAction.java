@@ -7,15 +7,15 @@ import java.util.logging.Logger;
 import org.jdesktop.application.Task;
 
 import com.serli.dojo.superprosper.database.DBMockupApplication;
-import com.serli.dojo.superprosper.database.database.derby.DerbyUtil;
+import com.serli.dojo.superprosper.database.engine.DerbyEngine;
 
 public class RunScriptAction extends Task<Void, Void> {
 	
 	private Logger logger = null;
-	private DerbyUtil dbu = null;
+	private DerbyEngine dbu = null;
 	private String scriptPath = null;
 	
-	public RunScriptAction(DBMockupApplication app, DerbyUtil dbu, String scriptPath) {
+	public RunScriptAction(DBMockupApplication app, DerbyEngine dbu, String scriptPath) {
 		super(app);
 		this.logger = app.getLogger();
 		this.dbu = dbu;
@@ -27,7 +27,7 @@ public class RunScriptAction extends Task<Void, Void> {
 		logger.log(Level.INFO, "Exécution du script : " + scriptPath);
 		if (dbu != null) {
 			try {
-				dbu.executeScript(scriptPath);	
+//				dbu.executeScript(scriptPath);	
 			} catch (Exception ex) {
 				logger.log(Level.SEVERE, "Erreur lors de la demande d'exécution du script.", ex);
 			}

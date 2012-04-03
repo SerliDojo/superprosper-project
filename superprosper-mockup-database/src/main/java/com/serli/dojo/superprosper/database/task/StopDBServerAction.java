@@ -1,40 +1,28 @@
 package com.serli.dojo.superprosper.database.task;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.jdesktop.application.Task;
 
 import com.serli.dojo.superprosper.database.DBMockupApplication;
-import com.serli.dojo.superprosper.database.database.derby.DerbyUtil;
+import com.serli.dojo.superprosper.database.engine.DerbyEngine;
 
 public class StopDBServerAction extends Task<Void, Void> {
 
-	private Logger logger = null;
-	private DerbyUtil dbu = null;
-	
-	public StopDBServerAction(DBMockupApplication app, DerbyUtil dbu) {
+	private DerbyEngine engine = null;
+
+	public StopDBServerAction(DBMockupApplication app, DerbyEngine engine) {
 		super(app);
-		logger = app.getLogger();
-		this.dbu = dbu;
+		this.engine = engine;
 	}
 
 	@Override
 	protected Void doInBackground() throws Exception {
-		dbu.close();	
+		engine.stop();
 		return null;
 	}
-	
+
 	@Override
-	protected void succeeded(Void v) {
-		dbu = null;
-		((DBMockupApplication)getApplication()).setDerbyUtil(dbu);
-		logger.log(Level.INFO, "SUCCESS");
-	}
-	
-	@Override
-	protected void failed(Throwable ex) {
-		logger.log(Level.SEVERE, "Problème lors de l'arrêt du serveur Derby.", ex);
-		logger.log(Level.INFO, "ERROR");
+	protected void succeeded(Void nothing) {
+		super.succeeded(nothing);
+		((DBMockupApplication) getApplication()).setDerbyUtil(null);
 	}
 }
