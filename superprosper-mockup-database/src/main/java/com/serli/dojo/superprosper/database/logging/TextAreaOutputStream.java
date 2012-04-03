@@ -1,4 +1,4 @@
-package org.myjavadev.utility;
+package com.serli.dojo.superprosper.database.logging;
 
 import java.io.IOException;
 

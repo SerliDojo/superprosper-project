@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-import org.myjavadev.utility.TextAreaOutputStream;
 
 /**
  * Panneau permettant l'affichage de traces.

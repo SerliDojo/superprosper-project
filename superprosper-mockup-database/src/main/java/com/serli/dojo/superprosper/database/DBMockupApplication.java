@@ -16,7 +16,6 @@ import com.serli.dojo.superprosper.database.task.RunScriptAction;
 import com.serli.dojo.superprosper.database.task.RunSqlStatement;
 import com.serli.dojo.superprosper.database.task.StartDBServerAction;
 import com.serli.dojo.superprosper.database.task.StopDBServerAction;
-import com.serli.dojo.superprosper.database.view.DBMockupView;
 
 /**
  * The main class of the application.

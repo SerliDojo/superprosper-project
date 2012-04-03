@@ -1,4 +1,4 @@
-package com.serli.dojo.superprosper.database.view;
+package com.serli.dojo.superprosper.database;
 
 import javax.swing.ActionMap;
 import javax.swing.JButton;
@@ -9,6 +9,7 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.SingleFrameApplication;
 
 import com.serli.dojo.superprosper.database.logging.LoggingPanel;
+import com.serli.dojo.superprosper.database.view.RequestPanel;
 
 public class DBMockupView extends FrameView {
 
