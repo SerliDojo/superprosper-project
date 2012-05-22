@@ -96,7 +96,7 @@ public class ServiceClienteleDefaut extends ServiceGenerique implements ServiceC
 		}
 
 		TypedQuery<Client> query = getEntityManager().createNamedQuery(queryName, Client.class);
-		query.setParameter("recherche", recherche);
+		query.setParameter("recherche", "%" + recherche + "%");
 
 		return query.getResultList();
 	}
@@ -104,7 +104,7 @@ public class ServiceClienteleDefaut extends ServiceGenerique implements ServiceC
 	@Override
 	public List<Client> rechercherClients(String recherche, int decalage, int nombre) {
 		TypedQuery<Client> query = getEntityManager().createNamedQuery("Rechercher", Client.class);
-		query.setParameter("recherche", recherche);
+		query.setParameter("recherche", "%" + recherche + "%");
 		query.setFirstResult(decalage * nombre);
 		query.setMaxResults(nombre);
 
@@ -114,7 +114,7 @@ public class ServiceClienteleDefaut extends ServiceGenerique implements ServiceC
 	@Override
 	public List<Client> rechercherClients(Filtre filtre, String recherche, int decalage, int nombre, Tri tri) {
 		TypedQuery<Client> query = getEntityManager().createNamedQuery(queryNames.get(filtre).get(tri), Client.class);
-		query.setParameter("recherche", recherche);
+		query.setParameter("recherche", "%" + recherche + "%");
 		query.setFirstResult(decalage * nombre);
 		query.setMaxResults(nombre);
 
