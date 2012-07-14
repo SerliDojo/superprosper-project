@@ -43,7 +43,7 @@ public class ServiceClienteleDefautTest {
 
 		List<Client> clientsLus = clientService.rechercherClients("MOTCLE");
 
-		verify(query).setParameter("recherche", "MOTCLE");
+		verify(query).setParameter("recherche", "%MOTCLE%");
 		assertListEquals(clientsFictifs, clientsLus);
 	}
 
@@ -54,7 +54,7 @@ public class ServiceClienteleDefautTest {
 
 		List<Client> clientsLus = clientService.rechercherClients(ServiceClientele.Filtre.CLIENTS_SOUSCRITS, "MOTCLE");
 
-		verify(query).setParameter("recherche", "MOTCLE");
+		verify(query).setParameter("recherche", "%MOTCLE%");
 		assertListEquals(clientsFictifs, clientsLus);
 	}
 
@@ -65,7 +65,7 @@ public class ServiceClienteleDefautTest {
 
 		List<Client> clientsLus = clientService.rechercherClients(ServiceClientele.Filtre.CLIENTS_PROSPECTES, "MOTCLE");
 
-		verify(query).setParameter("recherche", "MOTCLE");
+		verify(query).setParameter("recherche", "%MOTCLE%");
 		assertListEquals(clientsFictifs, clientsLus);
 	}
 
@@ -77,7 +77,7 @@ public class ServiceClienteleDefautTest {
 		List<Client> clientsLus = clientService.rechercherClients(ServiceClientele.Filtre.CLIENTS_NON_PROSPECTES,
 				"MOTCLE");
 
-		verify(query).setParameter("recherche", "MOTCLE");
+		verify(query).setParameter("recherche", "%MOTCLE%");
 		assertListEquals(clientsFictifs, clientsLus);
 	}
 
@@ -88,7 +88,7 @@ public class ServiceClienteleDefautTest {
 
 		List<Client> clientsLus = clientService.rechercherClients("MOTCLE", 3, 2);
 
-		verify(query).setParameter("recherche", "MOTCLE");
+		verify(query).setParameter("recherche", "%MOTCLE%");
 		verify(query).setFirstResult(6);
 		verify(query).setMaxResults(2);
 		assertListEquals(clientsFictifs, clientsLus);
@@ -154,7 +154,7 @@ public class ServiceClienteleDefautTest {
 
 				List<Client> clientsLus = clientService.rechercherClients(filtre, "MOTCLE", 3, 2, tri);
 
-				verify(query).setParameter("recherche", "MOTCLE");
+				verify(query).setParameter("recherche", "%MOTCLE%");
 				verify(query).setFirstResult(6);
 				verify(query).setMaxResults(2);
 				assertListEquals(clientsFictifs, clientsLus);
