@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<wicket:panel>
+	<form id="listFilters" class="form-inline" action="search.html" wicket:id="formProsper">
+		<select wicket:id="choixClient">
+		 	<option>Tous</option>
+		 	<option>Non prospectés</option>
+		 	<option>Prospectés</option>
+		 	<option>Clients</option>
+		</select>	
+		<input class="span6" type="text" placeholder="Recherche" wicket:id="searchText" />
+		<button type="submit" class="btn">Rechercher</button>
+	</form>
+</wicket:panel>
+
+
+</body>
+</html>
