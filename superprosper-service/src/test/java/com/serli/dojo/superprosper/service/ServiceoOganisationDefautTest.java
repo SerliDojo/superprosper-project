@@ -1,4 +1,4 @@
-package com.serli.dojo.service;
+package com.serli.dojo.superprosper.service;
 
 import static org.mockito.Mockito.*;
 
