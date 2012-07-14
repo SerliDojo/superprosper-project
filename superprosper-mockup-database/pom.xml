@@ -10,6 +10,18 @@
 
 	<artifactId>superprosper-mockup-database</artifactId>
 
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/dataset</directory>
+				<targetPath>dataset</targetPath>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>

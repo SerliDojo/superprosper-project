@@ -16,13 +16,6 @@
 				<directory>src/main/schema</directory>
 				<targetPath>schema</targetPath>
 			</resource>
-			<resource>
-				<directory>src/main/dataset</directory>
-				<targetPath>dataset</targetPath>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
 		</resources>
 	</build>
 
