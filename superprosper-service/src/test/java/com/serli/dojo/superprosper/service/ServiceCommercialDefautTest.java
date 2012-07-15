@@ -18,8 +18,11 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.serli.dojo.superprosper.domain.Client;
+import com.serli.dojo.superprosper.domain.Clients;
 import com.serli.dojo.superprosper.domain.Contrat;
+import com.serli.dojo.superprosper.domain.Contrats;
 import com.serli.dojo.superprosper.domain.Prospection;
+import com.serli.dojo.superprosper.domain.Prospections;
 import com.serli.dojo.superprosper.service.defaut.ServiceCommercialDefaut;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,17 +41,8 @@ public class ServiceCommercialDefautTest {
 
 	@Test
 	public void testAjouterContrat() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(Arrays.asList(prospection));
-		client.setContrats(new ArrayList<Contrat>());
-
-		Contrat contrat = new Contrat();
-		contrat.setSignature(calendar.getTime());
+		Client client = Clients.creerBetaAvecProspectionAu5Juillet2012();
+		Contrat contrat = Contrats.creerSigneAu5Juillet2012();
 
 		clientService.ajouterContrat(contrat, client);
 
@@ -58,18 +52,8 @@ public class ServiceCommercialDefautTest {
 
 	@Test
 	public void testAjouterContratSansProspection() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(Arrays.asList(prospection));
-		client.setContrats(new ArrayList<Contrat>());
-
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Contrat contrat = new Contrat();
-		contrat.setSignature(calendar.getTime());
+		Client client = Clients.creerAlphaAvecProspectionAu6Avril2012();
+		Contrat contrat = Contrats.creerSigneAu5Juillet2012();
 
 		try {
 			clientService.ajouterContrat(contrat, client);
@@ -84,18 +68,8 @@ public class ServiceCommercialDefautTest {
 
 	@Test
 	public void testAjouterProspection() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospectionExistance = new Prospection();
-		prospectionExistance.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(new ArrayList<Prospection>());
-		client.getProspections().add(prospectionExistance);
-
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
+		Client client = Clients.creerAlphaAvecProspectionAu6Avril2012();
+		Prospection prospection = Prospections.creerAu5Juillet2012();
 
 		clientService.ajouterProspection(prospection, client);
 
@@ -105,17 +79,8 @@ public class ServiceCommercialDefautTest {
 
 	@Test
 	public void testAjouterProspectionEnDouble() {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		Prospection prospectionExistance = new Prospection();
-		prospectionExistance.setContact(calendar.getTime());
-
-		Client client = creerClient("base");
-		client.setProspections(new ArrayList<Prospection>());
-		client.getProspections().add(prospectionExistance);
-
-		Prospection prospection = new Prospection();
-		prospection.setContact(calendar.getTime());
+		Prospection prospection = Prospections.creerAu6Avril2012();
+		Client client = Clients.creerAlphaAvecProspectionAu6Avril2012();
 
 		try {
 			clientService.ajouterProspection(prospection, client);
