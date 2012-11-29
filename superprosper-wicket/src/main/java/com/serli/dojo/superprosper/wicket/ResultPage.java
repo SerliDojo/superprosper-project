@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
@@ -23,6 +25,7 @@ import org.apache.wicket.model.Model;
 
 import com.serli.dojo.superprosper.domain.Client;
 import com.serli.dojo.superprosper.service.ServiceClientele;
+import com.serli.dojo.superprosper.service.ServiceClientele.Filtre;
 import com.serli.dojo.superprosper.service.defaut.ServiceClienteleDefaut;
 
 public class ResultPage extends WebPage {
@@ -35,8 +38,9 @@ public class ResultPage extends WebPage {
 
 	public ResultPage(String searchTextValue, ServiceClientele.Filtre filtre){
 		entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		
-		add(new SearchPanel("searchPanel", searchTextValue, filtre));
+
+		Pair<String, Filtre> pair = new ImmutablePair<String, Filtre>(searchTextValue, filtre);
+		add(new SearchPanel("searchPanel", Model.of(pair)));
 
         final Label customerName = new Label("customerName", new Model());
         customerName.setOutputMarkupId(true);

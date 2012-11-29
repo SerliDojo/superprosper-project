@@ -7,8 +7,6 @@ public class SuperProsperApplication extends WebApplication {
 
 	@Override
 	public Class<? extends Page> getHomePage() {
-		// TODO Auto-generated method stub
 		return HomePage.class;
 	}
-
 }
