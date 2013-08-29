@@ -60,12 +60,12 @@ public class Client implements Serializable {
 	static final String JPQL_CRITERE_CLIENTS_SOUSCRITS = " and c.contrats is not empty";
 	static final String JPQL_CRITERE_CLIENTS_PROSPECTES = " and c.contrats is empty and c.prospections is not empty";
 	static final String JPQL_CRITERE_CLIENTS_NON_PROSPECTES = " and c.contrats is empty and c.prospections is empty";
-	static final String JPQL_TRI_PAR_NUMERO_ASC = " order by numero asc";
-	static final String JPQL_TRI_PAR_NUMERO_DESC = " order by numero desc";
-	static final String JPQL_TRI_PAR_NOM_PRENOM_ASC = " order by nom asc, prenom asc";
-	static final String JPQL_TRI_PAR_NOM_PRENOM_DESC = " order by nom desc, prenom desc";
-	static final String JPQL_TRI_PAR_REGION_ASC = " order by region asc";
-	static final String JPQL_TRI_PAR_REGION_DESC = " order by region desc";
+	static final String JPQL_TRI_PAR_NUMERO_ASC = " order by c.numero asc";
+	static final String JPQL_TRI_PAR_NUMERO_DESC = " order by c.numero desc";
+	static final String JPQL_TRI_PAR_NOM_PRENOM_ASC = " order by c.nom asc, c.prenom asc";
+	static final String JPQL_TRI_PAR_NOM_PRENOM_DESC = " order by c.nom desc, c.prenom desc";
+	static final String JPQL_TRI_PAR_REGION_ASC = " order by c.region asc";
+	static final String JPQL_TRI_PAR_REGION_DESC = " order by c.region desc";
 
 	/** Numéro de série. */
 	private static final long serialVersionUID = 239754410746100939L;
