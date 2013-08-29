@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="superprosper-pu" transaction-type="JTA">
+            <jta-data-source>jdbc/SuperProsper</jta-data-source>
+		<class>com.serli.dojo.superprosper.domain.Agent</class>
+		<class>com.serli.dojo.superprosper.domain.Client</class>
+		<class>com.serli.dojo.superprosper.domain.Contrat</class>
+		<class>com.serli.dojo.superprosper.domain.Prospection</class>
+		<class>com.serli.dojo.superprosper.domain.Texte</class>
+	</persistence-unit>
+</persistence>

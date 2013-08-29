@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:prosper="http://java.sun.com/jsf/composite/ezcomp">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Super Prosper</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <style>
+            body {
+                padding-top: 60px;
+                /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+    </h:head>
+    <h:body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse"
+                       data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span>
+                    </a> <a class="brand" href="#"><img src="images/logoBleu.png" /></a>
+                    <div class="nav-collapse">
+                        <!-- 					<ul class="nav"> -->
+                        <!-- 						<li class="active"><a href="#">Prospection</a></li> -->
+                        <!-- 						<li><a href="#about">Vente</a></li> -->
+                        <!-- 						<li><a href="#contact">Aide</a></li> -->
+                        <!-- 					</ul> -->
+                        <p class="navbar-text pull-right">
+                            24 janvier 2012 - Connecté en tant que <a href="#">Martine
+                                BELLE-MAMAN</a>
+                        </p>
+                    </div>
+                    /.nav-collapse
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="listPanel">
+                <prosper:searchbar filter="#{searchModel.filtre}" value="#{searchModel.searchValue}"/>
+
+                <h:form>
+                    <h:dataTable styleClass="table table-striped" value="#{searchModel.clients}" var="client">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Numéro"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{client.numero}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nom"></h:outputText>
+                            </f:facet>
+                            <strong><h:outputText value="#{client.nom}"></h:outputText></strong>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prénom"></h:outputText>
+                            </f:facet>
+                            <strong><h:outputText value="#{client.prenom}"></h:outputText></strong>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Téléphone"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{client.telephone}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Région"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{client.region}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton styleClass="btn btn-primary btn-mini" action="#{searchController.select(client)}" value="Voir"></h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+
+            </div>
+
+            <div class="detailPanel">
+                <div id="detailTitle" class="page-header">
+                    <h1>
+                        #{searchModel.client.prenom} #{searchModel.client.nom}
+                        <button class="btn btn-primary btn-mini" type="submit">Modification</button>
+                        <button class="btn btn-primary btn-mini" type="submit">Nouveau contrat</button>
+                        <button class="btn btn-primary btn-mini" type="submit">Nouvelle prospection</button>
+                    </h1>
+                </div>
+                <div id="detailTabs" class="row">
+                    <div id="detailPart1" class="span4">
+                        <h3>Description</h3>
+                        <table id="contratsTable" class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Age</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Adresse</td>
+                                    <td>#{searchModel.client.adresse}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="detailPart2" class="span4">
+                        <h3>Contrats</h3>
+                        <h:dataTable styleClass="table table-striped" value="#{searchModel.client.contrats}" var="contrat">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numéro"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{contrat.numero}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Produit"></h:outputText>
+                                </f:facet>
+                                <strong><h:outputText value="#{contrat.produits}"></h:outputText></strong>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Signature"></h:outputText>
+                                </f:facet>
+                                <strong><h:outputText value="#{contrat.signature}"></h:outputText></strong>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Effet"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{contrat.effet}"></h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                    <div id="detailPart3" class="span4">
+                        <h3>Prospections</h3>
+                        <h:dataTable styleClass="table table-striped" value="#{searchModel.client.prospections}" var="prospection">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date"></h:outputText>
+                                </f:facet>
+                                <h:outputFormat value="{0, date, dd/MM/yyyy}">
+                                    <f:param value="#{prospection.contact}" />
+                                </h:outputFormat>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Gestionnaire"></h:outputText>
+                                </f:facet>
+                                <strong><h:outputText value="#{prospection.agent.prenom} #{prospection.agent.nom}"></h:outputText></strong>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

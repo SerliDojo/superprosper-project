@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:prosper="http://java.sun.com/jsf/composite/ezcomp">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Super Prosper</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <style>
+            body {
+                padding-top: 60px;
+                /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+    </h:head>
+    <h:body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse"
+                       data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span>
+                    </a> <a class="brand" href="#"><img src="images/logoBleu.png" /></a>
+                    <div class="nav-collapse">
+                        <!-- 					<ul class="nav"> -->
+                        <!-- 						<li class="active"><a href="#">Prospection</a></li> -->
+                        <!-- 						<li><a href="#about">Vente</a></li> -->
+                        <!-- 						<li><a href="#contact">Aide</a></li> -->
+                        <!-- 					</ul> -->
+                        <p class="navbar-text pull-right">
+                            24 janvier 2012 - Connecté en tant que <a href="#">Martine
+                                BELLE-MAMAN</a>
+                        </p>
+                    </div>
+                    /.nav-collapse
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="text-align: center">
+            <div class="hero-unit">
+                <img src="images/logoBigBleu.png" />
+            </div>
+            <prosper:searchbar filter="#{searchModel.filtre}" value="#{searchModel.searchValue}"/>
+            
+        </div>
+    </h:body>
+</html>
+
