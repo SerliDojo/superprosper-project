@@ -1,0 +1,76 @@
+	<div class="detailPanel">
+			<div id="detailTitle" class="page-header">
+				<h1>
+					Anatole ROLLAND
+					<button class="btn btn-primary btn-mini" type="submit">Modification</button>
+					<button class="btn btn-primary btn-mini" type="submit">Nouveau contrat</button>
+					<button class="btn btn-primary btn-mini" type="submit">Nouvelle prospection</button>
+				</h1>
+			</div>
+			<div id="detailTabs" class="row">
+				<div id="detailPart1" class="span4">
+					<h3>Description</h3>
+					<table id="contratsTable" class="table table-striped">
+						<tbody>
+							<tr>
+								<td>Age</td>
+								<td>${_client.age} ans</td>
+							</tr>
+							<tr>
+								<td>Adresse</td>
+								<td>
+									${_client.adresse}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="detailPart2" class="span4">
+					<h3>Contrats</h3>
+					<table id="contratsTable" class="table table-striped">
+						<thead>
+						
+							<tr>
+								<th class="span2">Numéro</th>
+								<th class="span6">Produit</th>
+								<th class="span2">Signature</th>
+								<th class="span2">Effet</th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							#{list items:_client.contrats, as:'contrat'}
+							<tr>
+								<td>${contrat.numero}</td>
+								<td>${contrat.produits}</td>
+								<td>${contrat.signature}</td>
+								<td>${contrat.effet}</td>
+							</tr>
+							
+							#{/list}
+						</tbody>
+					</table>
+				</div>
+				<div id="detailPart3" class="span4">
+					<h3>Prospections</h3>
+					<table id="prospectionssTable" class="table table-striped">
+						<thead>
+							<tr>
+								<th class="span4">Date</th>
+								<th class="span8">Gestionnaire</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>01/01/2010</td>
+								<td>Jean Marc BEAU PAPA</td>
+							</tr>
+							<tr>
+								<td>05/06/2010</td>
+								<td>Martine BELLE MAMAN</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>

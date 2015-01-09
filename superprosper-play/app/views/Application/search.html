@@ -1,0 +1,47 @@
+#{extends 'main.html' /}
+#{set title:'Search' /}
+	<div class="container">
+		<div class="listPanel">
+			#{recherche recherche:recherche/}
+			<table id="listTable" class="table table-striped">
+				<thead>
+					<tr>
+						<th class="span1">Numéro</th>
+						<th class="span2">Nom</th>
+						<th class="span2">Prénom</th>
+						<th class="span2">Téléphone</th>
+						<th class="span2">Région</th>
+						<th class="span2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					#{list items:clients, as:'client'}
+					<tr>
+						<td>${client.numero}</td>
+						<td><strong>${client.nom}</strong></td>
+						<td><strong>${client.prenom}</strong></td>
+						<td>${client.telephone}</td>
+						<td>${client.regionLibelle}</td>
+						<td><button class="btn btn-primary btn-mini" type="submit">Voir</button></td>
+					
+					</tr>
+					#{/list}
+				</tbody>
+			</table>
+			<div class="pagination pagination-right">
+				<ul>
+					<li><a href="#">&lt;&lt;</a></li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">&gt;&gt;</a></li>
+				</ul>
+			</div>
+		</div>
+		#{if clientdetails }
+			#{details client:clientdetails /}
+			
+		#{/if}
+	
+	</div>

@@ -1,0 +1,10 @@
+<form id="listFilters" class="form-inline"
+	action="@{Application.search}">
+	<select name="filtre"> #{list
+		items:models.Client.Filtre.values(), as:'filtre'}
+		<option>${filtre}</option> #{/list}
+	</select> 
+	<input class="span6" type="text" placeholder="Recherche"
+		name="recherche" value="${_recherche}"/>
+	<button type="submit" class="btn">Rechercher</button>
+</form>
